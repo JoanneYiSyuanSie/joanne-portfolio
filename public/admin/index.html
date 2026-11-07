@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Adabanipal CMS — 後台管理</title>
+  <style>
+    /* Speed up Sveltia CMS default View Transitions */
+    ::view-transition-group(root),
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.1s !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sveltia CMS is a lightweight, modern, and 100% compatible drop-in replacement for Decap CMS -->
+  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    const { h } = window.React;
+    const createClass = (comp) => {
+      return class extends window.React.Component {
+        render() { return comp.call(this); }
+      };
+    };
+
+    const PostPreview = createClass(function () {
+      const { entry } = this.props;
+      const title = entry.getIn(['data', 'title']) || 'Untitled';
+      const date = entry.getIn(['data', 'date']) || '';
+      const category = entry.getIn(['data', 'category']) || '';
+      const body = entry.getIn(['data', 'body']) || '';
+
+      // Our magic logic: split by double newlines to preserve empty spaces
+      const parts = body.split(/\n\n/);
+      const contentNodes = parts.map((part, index) => {
+        if (part.trim() === "") {
+          return h('div', { key: index, className: 'empty-line' });
+        }
+        return h('div', {
+          key: index,
+          className: 'mb-6',
+          dangerouslySetInnerHTML: { __html: marked.parse(part) }
+        });
+      });
+
+      return h('div', { className: 'preview-container' },
+        h('header', null,
+          h('div', { className: 'meta-box' },
+            h('span', { className: 'badge badge-category' }, category),
+            h('span', { className: 'badge badge-date' }, date ? date.toString().split('T')[0].replace(/-/g, '.') : '')
+          ),
+          h('h1', null, title)
+        ),
+        h('article', { className: 'prose' }, contentNodes)
+      );
+    });
+
+    CMS.registerPreviewTemplate("posts", PostPreview);
+    CMS.registerPreviewStyle("preview.css");
+  </script>
+</body>
+
+</html>

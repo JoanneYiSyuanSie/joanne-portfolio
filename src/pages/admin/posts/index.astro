@@ -1,0 +1,8 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { AdminPostsApp } from '../../../components/admin/AdminPostsApp';
+---
+
+<AdminLayout title="文章管理 | 花花巴尼拔圖書館">
+  <AdminPostsApp client:only="react" />
+</AdminLayout>

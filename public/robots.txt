@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Do not index the Decap CMS admin interface
+Disallow: /admin/
+
+Sitemap: https://joanne-portfolio.dev/sitemap-index.xml

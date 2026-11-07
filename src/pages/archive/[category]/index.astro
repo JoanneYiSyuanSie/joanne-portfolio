@@ -1,0 +1,27 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCategories, getPostsByCategory } from '../../../lib/content';
+import { Archive } from '../../../components/pages/Archive.tsx';
+
+export async function getStaticPaths() {
+  const categories = getCategories();
+  return categories.map(cat => ({
+    params: { category: cat.slug },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props;
+const posts = getPostsByCategory(category.slug);
+const allCategories = getCategories();
+const totalCount = allCategories.reduce((sum, c) => sum + c.count, 0);
+
+const categoryDescription = category.description || `花花巴尼拔圖書館《${category.name}》系列作品目錄。收錄創作者謊花於此系列發布的所有章節與閱讀清單，共 ${posts.length} 篇作品。`;
+---
+
+<Layout 
+  title={`${category.name} | 藏書 | 花花巴尼拔圖書館`}
+  description={categoryDescription}
+>
+  <Archive client:idle posts={posts} categories={allCategories} currentCategorySlug={category.slug} currentCategoryName={category.name} totalCount={totalCount} />
+</Layout>

@@ -1,0 +1,207 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getAllPosts, getPostUrl } from '../../../lib/content';
+import { ArticleRenderer } from '../../../components/pages/ArticleRenderer.tsx';
+import { ArticleDecryptor } from '../../../components/pages/ArticleDecryptor.tsx';
+import { ArticleAgeGate } from '../../../components/pages/ArticleAgeGate.tsx';
+import { ArticleControls } from '../../../components/pages/ArticleControls.tsx';
+
+export async function getStaticPaths() {
+  const posts = getAllPosts();
+  return posts.map(post => ({
+    params: { category: post.categorySlug, slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { category, slug } = Astro.params;
+const { post } = Astro.props;
+
+const title = post.seoTitle || post.title + " | 花花巴尼拔圖書館";
+const description = post.seoDescription || post.excerpt;
+
+// Navigation logic on server
+const allPosts = getAllPosts();
+const categoryPosts = allPosts.filter(p => p.category === post.category);
+const currentIndex = categoryPosts.findIndex(p => p.slug === post.slug);
+let prevPost = null;
+let nextPost = null;
+
+if (currentIndex !== -1) {
+  prevPost = currentIndex < categoryPosts.length - 1 ? categoryPosts[currentIndex + 1] : null;
+  nextPost = currentIndex > 0 ? categoryPosts[currentIndex - 1] : null;
+}
+
+const processedContent = post.isEncrypted ? post.content : (post.content || "").replace(/\n\n\n+/g, (match: string) => {
+  const newlineCount = (match.match(/\n/g) || []).length;
+  return "\n\n" + "&nbsp;\n\n".repeat(newlineCount - 2);
+});
+---
+
+<Layout 
+  title={title} 
+  description={description} 
+  ogType="article"
+  noindex={Boolean(post.noindex || post.isR18)}
+>
+  <div class="flex flex-col bg-[#FFFDF9]">
+    <div class="sticky top-0 bg-ink text-white z-20 flex items-center justify-between p-4 px-6 md:px-12 border-b-4 border-ink">
+      <a href={`/archive/${post.categorySlug}`} class="font-mono text-sm font-bold flex items-center gap-2 hover:text-accent transition-colors group">
+        <span class="bg-white text-ink w-6 h-6 flex items-center justify-center rounded-sm group-hover:bg-accent group-hover:text-white transition-colors">&lt;</span>
+        RETURN_TO_INDEX
+      </a>
+      <div class="font-mono text-xs font-bold opacity-80">DOC: {post.slug}</div>
+    </div>
+
+    <div class="flex-1 max-w-3xl w-full p-6 md:p-12 pb-32">
+      <header class="mb-12">
+        <div class="flex gap-3 mb-6">
+          <a href={`/archive/${post.categorySlug}`} class="inline-flex items-center justify-center px-2 py-1 bg-accent text-white font-mono text-xs font-bold leading-none hover:bg-ink transition-colors">{post.category}</a>
+          <span class="inline-flex items-center justify-center px-2 py-1 border-2 border-ink text-ink font-mono text-xs font-bold leading-none">{post.date.slice(0, 10).replace(/-/g, '.')}</span>
+          {post.status === "UPDATED" && (
+            <span class="inline-flex items-center justify-center px-2 py-1 bg-ink text-accent font-mono text-xs font-bold leading-none">UPDATED</span>
+          )}
+        </div>
+
+        <h1 class="font-serif text-4xl md:text-5xl font-black text-ink leading-snug mb-8">
+          {post.title}
+        </h1>
+
+        <ArticleControls client:idle slug={post.slug} />
+      </header>
+
+      <article id="article-content" class="prose prose-stone max-w-none text-ink leading-loose font-serif tracking-wide font-medium prose-p:my-6 prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-ink-light prose-blockquote:before:content-none prose-blockquote:after:content-none prose-strong:text-ink prose-strong:font-black prose-h2:scroll-mt-24 prose-h3:scroll-mt-24 prose-a:text-accent prose-a:underline prose-a:decoration-2 prose-a:underline-offset-4 hover:prose-a:decoration-accent/50 prose-lg prose-layout-left">
+        {post.isEncrypted ? (
+          <ArticleDecryptor client:load post={post} />
+        ) : post.isR18 ? (
+          <ArticleAgeGate client:load post={post} processedContent={processedContent} />
+        ) : (
+          <ArticleRenderer processedContent={processedContent} />
+        )}
+      </article>
+
+      <footer class="mt-24 pt-8 border-t-4 border-ink text-center flex flex-col items-center gap-4 relative">
+        <div class="flex items-center justify-center gap-8 w-full max-w-sm mx-auto">
+          {prevPost ? (
+            <a href={getPostUrl(prevPost)} class="font-mono text-lg font-bold text-ink hover:text-accent hover:-translate-x-1 transition-all" title="PREV_RECORD">
+              [ &lt; ]
+            </a>
+          ) : <div class="w-10"></div>}
+          <div class="w-8 h-8 rounded-full border-4 border-ink flex items-center justify-center shrink-0">
+            <div class="w-2 h-2 bg-accent"></div>
+          </div>
+          {nextPost ? (
+            <a href={getPostUrl(nextPost)} class="font-mono text-lg font-bold text-ink hover:text-accent hover:translate-x-1 transition-all" title="NEXT_RECORD">
+              [ &gt; ]
+            </a>
+          ) : <div class="w-10"></div>}
+        </div>
+        <div class="flex flex-col gap-2" id="article-end-marker" data-slug={post.slug}>
+          <span class="font-mono text-xs font-bold text-ink/70">
+            [ END OF TRANSMISSION ]
+          </span>
+          <button id="btn-share" data-title={post.title} data-slug={post.slug} class="font-mono text-[10px] font-bold text-ink hover:bg-ink hover:text-white border border-transparent hover:border-ink px-2 py-1 transition-all cursor-pointer">
+            [ SHARE_SIGNAL ]
+          </button>
+          <button id="btn-back-to-top" class="font-mono text-[10px] font-bold text-accent hover:bg-accent hover:text-white px-2 py-1 transition-colors cursor-pointer">
+            [ BACK TO TOP ]
+          </button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest('a[href^="#"]');
+      if (!target) return;
+      e.preventDefault();
+      
+      const targetId = target.getAttribute('href')?.replace(/^#+/, '');
+      if (!targetId) return;
+      const decodedId = decodeURIComponent(targetId);
+      
+      let targetElement = document.getElementById(decodedId) || document.getElementById(decodedId.toLowerCase());
+      if (!targetElement) {
+        const elements = document.querySelectorAll('[id]');
+        const searchId = decodedId.toLowerCase();
+        for (let i = 0; i < elements.length; i++) {
+          if (elements[i].id.toLowerCase() === searchId) {
+            targetElement = elements[i] as HTMLElement;
+            break;
+          }
+        }
+      }
+
+      if (targetElement) {
+        const container = document.getElementById('main-scroll-container');
+        if (container && container.scrollHeight > container.clientHeight) {
+          const containerRect = container.getBoundingClientRect();
+          const targetRect = targetElement.getBoundingClientRect();
+          const targetScrollTop = container.scrollTop + (targetRect.top - containerRect.top) - 96;
+          container.scrollTo({ top: targetScrollTop, behavior: 'smooth' });
+        } else {
+          const targetRect = targetElement.getBoundingClientRect();
+          const targetScrollTop = window.scrollY + targetRect.top - 96;
+          window.scrollTo({ top: targetScrollTop, behavior: 'smooth' });
+        }
+      }
+    });
+
+    // Share logic
+    document.getElementById('btn-share')?.addEventListener('click', async (e) => {
+      const btn = e.currentTarget as HTMLButtonElement;
+      const title = btn.dataset.title;
+      const slug = btn.dataset.slug;
+      
+      const shareData = {
+        title: title,
+        text: `閱讀《${title}》 - 花花巴尼拔圖書館`,
+        url: window.location.href
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+          if (window.dataLayer) window.dataLayer.push({ event: 'share_article', method: 'native_share', slug });
+        } else {
+          throw new Error("Web Share API not supported");
+        }
+      } catch (err: any) {
+        if (err.name !== 'AbortError') {
+          navigator.clipboard.writeText(window.location.href);
+          if (window.dataLayer) window.dataLayer.push({ event: 'share_article', method: 'clipboard', slug });
+          alert("已複製連結 / URL_COPIED");
+        }
+      }
+    });
+
+    // Back to top
+    document.getElementById('btn-back-to-top')?.addEventListener('click', () => {
+      document.getElementById('main-scroll-container')?.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Intersection Observer for article end
+    const endMarker = document.getElementById('article-end-marker');
+    if (endMarker) {
+      const slug = endMarker.dataset.slug;
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          if (window.dataLayer) window.dataLayer.push({ event: 'article_completed', slug });
+          observer.disconnect();
+        }
+      }, { threshold: 0.5 });
+      observer.observe(endMarker);
+    }
+    
+    // Handle spoiler clicks
+    document.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest('.spoiler');
+      if (target) {
+        target.classList.add('is-revealed');
+      }
+    });
+  </script>
+</Layout>

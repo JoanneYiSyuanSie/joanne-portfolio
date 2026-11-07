@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Archive } from '../../components/pages/Archive.tsx';
+import { getAllPosts, getCategories } from '../../lib/content';
+
+const posts = getAllPosts();
+const categories = getCategories();
+const totalCount = posts.length;
+---
+
+<Layout 
+  title="藏書 | 花花巴尼拔圖書館"
+  description="花花巴尼拔圖書館藏書目錄。收錄創作者謊花的原創連載小說、短篇創作、委託展示與隨筆雜談，全站完整收錄清單。"
+>
+  <Archive client:idle posts={posts} categories={categories} currentCategorySlug={null} currentCategoryName={null} totalCount={totalCount} />
+</Layout>

@@ -1,0 +1,25 @@
+{
+  "commission": {
+    "surprisePackOpen": true,
+    "customCommissionOpen": true,
+    "surprisePackReferenceUrl": "/archive/architecture/01-astro-hybrid-architecture",
+    "googleAppsScriptUrl": "",
+    "types": [
+      {
+        "id": "全端專案開發",
+        "label": "1. 現代 Web / 前端專案開發",
+        "description": "- 包含系統架構規劃、響應式 UI 切版、狀態管理與 RESTful / GraphQL API 整合。\n- 技術棧涵蓋 Astro、React 19、TypeScript 與 Tailwind CSS。"
+      },
+      {
+        "id": "效能優化諮詢",
+        "label": "2. 網站效能優化與架構遷移",
+        "description": "- Core Web Vitals 指標提升、靜態生成 (SSG) 策略優化、邊緣運算整合與 SEO 結構化資料建置。"
+      },
+      {
+        "id": "職缺與合作洽詢",
+        "label": "3. 職缺邀約 / 技術交流",
+        "description": "若有全職/兼職職缺機會、技術交流或專案合作意向，歡迎透過此表單直接聯絡。"
+      }
+    ]
+  }
+}

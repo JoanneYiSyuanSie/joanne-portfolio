@@ -1,0 +1,135 @@
+backend:
+  name: github
+  repo: "JoanneYiSyuanSie/joanne-portfolio"
+  branch: main
+local_backend: true
+
+locale: "zh_Hant"
+
+media_folder: "public/img"
+public_folder: "/img"
+
+collections:
+  - name: "categories"
+    label: "分類設定"
+    folder: "content/categories"
+    create: true
+    slug: "{{title}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: "分類名稱", name: "title", widget: "string", hint: "例如：【OC】薩托里" }
+      - { label: "網址代稱 (Slug)", name: "slug", widget: "string", hint: "自訂英文網址，例如：i-sartori。如果不填可能會導致網址亂碼。" }
+
+  - name: "posts"
+    label: "文章管理"
+    label_singular: "文章"
+    folder: "content/posts"
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: ["date", "title"]
+    view_groups:
+      - { label: "依分類群組", field: "category" }
+      - { label: "依發布狀態群組", field: "status" }
+    view_filters:
+      - { label: "只看草稿", field: "status", pattern: "DRAFT" }
+      - { label: "只看已發布", field: "status", pattern: "PUBLISHED" }
+      - { label: "加密文章", field: "password", pattern: ".+" }
+    summary: "{{title}} — {{date}} [{{status}}]"
+    fields:
+      - { label: "標題", name: "title", widget: "string", hint: "包含書名號的完整標題" }
+      - { label: "網址代稱 (Slug)", name: "slug", widget: "string", required: false, hint: "自訂網址，例如：my-story-title。留空則自動產生。" }
+      - { label: "發布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss", date_format: "YYYY-MM-DD", time_format: "HH:mm:ss" }
+      - label: "分類"
+        name: "category"
+        widget: "relation"
+        collection: "categories"
+        search_fields: ["title"]
+        value_field: "title"
+        display_fields: ["title"]
+        hint: "請先在「分類設定」新增分類，這裡才會出現選項"
+      - label: "狀態"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "已發布", value: "PUBLISHED" }
+          - { label: "已更新", value: "UPDATED" }
+          - { label: "草稿", value: "DRAFT" }
+      - { label: "標籤", name: "tags", widget: "list", required: false, hint: "可用於檢索與分類（請直接輸入標籤名稱）" }
+      - { label: "摘要", name: "excerpt", widget: "text", hint: "顯示在文章列表的簡短描述" }
+      - { label: "SEO 標題", name: "seoTitle", widget: "string", required: false, hint: "搜尋引擎顯示的標題（留空則使用文章標題）" }
+      - { label: "SEO 描述", name: "seoDescription", widget: "text", required: false, hint: "搜尋引擎顯示的描述（留空則使用摘要）" }
+      - { label: "搜尋屏蔽 (noindex)", name: "noindex", widget: "boolean", default: false, required: false, hint: "啟用後搜尋引擎將不會收錄此頁面（適合 R18/非公開內容）" }
+      - { label: "限制級文章 (R18)", name: "isR18", widget: "boolean", default: false, required: false, hint: "啟用後，解鎖頁面會顯示 R18 成人免責警語" }
+      - { label: "存取密碼", name: "password", widget: "string", required: false, hint: "輸入密碼以啟用加密（留空則為公開文章）" }
+      - { label: "內文", name: "body", widget: "markdown", modes: ["raw"] }
+
+  - name: "settings"
+    label: "網站設定"
+    files:
+      - label: "1. 站點基本資訊"
+        name: "site-config"
+        file: "content/site-config.json"
+        fields:
+          - { label: "站名", name: "siteName", widget: "string" }
+          - { label: "站名（英文）", name: "siteNameEn", widget: "string" }
+          - { label: "站點描述", name: "siteDescription", widget: "text" }
+          - { label: "作者名稱", name: "author", widget: "string" }
+          - { label: "作者簡介", name: "authorBio", widget: "text" }
+
+      - label: "2. 社群與友站連結"
+        name: "links"
+        file: "content/links.json"
+        fields:
+          - label: "社群帳號"
+            name: "social"
+            widget: "list"
+            fields:
+              - { label: "平台名稱 (例如 Threads)", name: "name", widget: "string" }
+              - { label: "網址", name: "url", widget: "string" }
+          - label: "友站連結"
+            name: "friendLinks"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "站名", name: "name", widget: "string" }
+              - { label: "網址", name: "url", widget: "string" }
+
+      - label: "3. 委託與彩蛋活動"
+        name: "features"
+        file: "content/features.json"
+        fields:
+          - label: "委託設定"
+            name: "commission"
+            widget: "object"
+            fields:
+              - { label: "驚喜包開放中", name: "surprisePackOpen", widget: "boolean", default: false }
+              - { label: "客製化委託開放中", name: "customCommissionOpen", widget: "boolean", default: true }
+              - { label: "驚喜包規則參考連結", name: "surprisePackReferenceUrl", widget: "string", required: false }
+              - { label: "Google Apps Script URL", name: "googleAppsScriptUrl", widget: "string", required: false, hint: "表單提交的後端 URL" }
+              - label: "委託形式說明"
+                name: "types"
+                widget: "list"
+                fields:
+                  - { label: "內部ID (請勿修改)", name: "id", widget: "hidden" }
+                  - { label: "形式名稱", name: "label", widget: "string" }
+                  - { label: "詳細說明 (Hover)", name: "description", widget: "text" }
+          - label: "彩蛋與優惠設定"
+            name: "easterEgg"
+            widget: "object"
+            fields:
+              - { label: "啟用彩蛋", name: "enable", widget: "boolean", default: false }
+              - label: "觸發模式"
+                name: "triggerMode"
+                widget: "select"
+                options:
+                  - { label: "按鍵密碼 (Keyboard)", value: "keyboard" }
+                  - { label: "布景切換順序 (Theme Sequence)", value: "theme_sequence" }
+              - label: "通關條件 (依序輸入)"
+                name: "secretKeyList"
+                widget: "list"
+                hint: "支援中文簡寫！例如：上, 下, 左, 右, 空白, 確認, 點, 大於, 斜線, 問號, A, B...（或是直接輸入符號/字母）"
+              - { label: "優惠碼 (選填)", name: "couponCode", widget: "string", required: false, hint: "設定後會出現一鍵複製按鈕" }
+              - { label: "開始時間 (選填)", name: "startDate", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: "HH:mm" }
+              - { label: "結束時間 (選填)", name: "endDate", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: "HH:mm" }
+              - { label: "優惠訊息", name: "message", widget: "markdown", required: false, modes: ["raw"] }

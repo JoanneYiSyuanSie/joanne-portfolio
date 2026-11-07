@@ -1,0 +1,125 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../index.css';
+import { Layout as ReactLayout } from '../components/Layout.tsx';
+import { getSiteConfig } from '../lib/content';
+import { EasterEgg } from '../components/EasterEgg.tsx';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title = "Joanne ｜ Personal Archive & Portfolio",
+  description = "Joanne 的個人作品集與技術筆記庫。聚焦現代前端工程、混合渲染架構與新粗獷主義介面設計。",
+  ogType = "website",
+  noindex = false
+} = Astro.props;
+
+let currentPath = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+if (currentPath.length > 1 && currentPath.endsWith('/')) {
+  currentPath = currentPath.slice(0, -1);
+}
+const siteConfig = getSiteConfig();
+
+const easterEggConfig = {
+  enable: true,
+  triggerMode: 'keyboard' as const,
+  sequenceLength: 10,
+};
+
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {noindex && <meta name="robots" content="noindex" />}
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={`https://joanne-portfolio.dev${currentPath}`} />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:image" content="https://joanne-portfolio.dev/favicon.ico" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://joanne-portfolio.dev/favicon.ico" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" />
+  </noscript>
+  <link rel="canonical" href={`https://joanne-portfolio.dev${currentPath}`} />
+  <script is:inline>
+    (function() {
+      const applyTheme = () => {
+        try {
+          const savedColor = localStorage.getItem('theme_accent_color');
+          if (savedColor) {
+            document.documentElement.style.setProperty('--theme-accent', savedColor);
+          }
+        } catch (e) {
+          console.warn("localStorage read blocked:", e);
+        }
+      };
+
+      // Run on initial load
+      applyTheme();
+
+      // Check newsletter dot state to prevent hydration flash
+      const applyDotState = () => {
+        try {
+          if (localStorage.getItem('newsletter_dot_dismissed') === 'true') {
+            document.documentElement.classList.add('dot-dismissed');
+          } else {
+            document.documentElement.classList.remove('dot-dismissed');
+          }
+        } catch (e) {}
+      };
+      applyDotState();
+
+      // Run after Astro transitions/swaps pages to prevent style reset
+      document.addEventListener('astro:after-swap', () => {
+        applyTheme();
+        applyDotState();
+      });
+
+      // Intercept any link pointing to #newsletter
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.getAttribute('href') === '#newsletter') {
+          e.preventDefault();
+          window.dispatchEvent(new CustomEvent('open-newsletter'));
+          
+          // Optionally dismiss the dot globally when they subscribe via article
+          try {
+            localStorage.setItem('newsletter_dot_dismissed', 'true');
+            document.documentElement.classList.add('dot-dismissed');
+          } catch(err) {}
+        }
+      });
+    })();
+  </script>
+  <ClientRouter />
+</head>
+<body>
+  <ReactLayout client:idle currentPath={currentPath}>
+    <div class="flex-1 flex flex-col min-h-full">
+      <slot />
+    </div>
+  </ReactLayout>
+
+  {easterEggConfig && <EasterEgg client:only="react" config={easterEggConfig} />}
+
+</body>
+</html>

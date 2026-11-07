@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { About } from '../../components/pages/About.tsx';
+---
+
+<Layout 
+  title="關於 | 花花巴尼拔圖書館"
+  description="關於創作者謊花與花花巴尼拔圖書館。介紹作者生平、創作理念、世界觀設定與作品總覽。"
+>
+  <About client:idle />
+</Layout>

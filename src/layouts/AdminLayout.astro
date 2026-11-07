@@ -1,0 +1,26 @@
+---
+import '../index.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = "內容管理後台 | Joanne's Archive" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{title}</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" />
+</head>
+<body class="bg-[#F7F5F0] text-[#1A1A1A] antialiased selection:bg-[#059669] selection:text-white">
+  <slot />
+</body>
+</html>

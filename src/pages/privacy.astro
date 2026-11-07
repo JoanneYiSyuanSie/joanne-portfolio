@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="隱私權政策 | Joanne's Archive">
+  <div class="p-6 md:p-12 max-w-3xl mx-auto font-sans">
+    <div class="brutalist-block p-8 bg-white border-4 border-ink shadow-[8px_8px_0_0_#000]">
+      <h1 class="font-serif text-3xl font-black mb-6 text-ink">隱私權政策</h1>
+      
+      <div class="space-y-6 text-ink/80 leading-relaxed text-sm md:text-base">
+        <p>
+          本網站（Joanne's Archive）重視並保護您的隱私權。為了幫助您瞭解本站如何收集、應用及保護您的資訊，請閱讀以下聲明：
+        </p>
+
+        <div>
+          <h2 class="font-bold text-ink mb-2 text-lg">1. 收集的資訊與用途</h2>
+          <p>
+            本網站使用 <strong>Google Analytics (分析)</strong> 服務來幫助館長了解訪客如何與網站互動，以便優化網站內容。
+            Google Analytics 會使用 Cookie 來收集匿名流量資料，這些資料可能包含：
+          </p>
+          <ul class="list-disc pl-5 mt-2 space-y-1">
+            <li>您的裝置資訊與瀏覽器版本</li>
+            <li>大概的地理位置（僅至城市或地區層級）</li>
+            <li>您在本網站上的瀏覽行為（例如：停留時間、點擊了哪些連結）</li>
+          </ul>
+          <p class="mt-2 text-xs font-bold bg-accent/10 p-2 border-l-4 border-accent text-accent-dark">
+            請放心，這些數據皆為匿名收集，我不會、也無法透過這些資料識別您的個人真實身分。
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-bold text-ink mb-2 text-lg">2. 關於 Cookie</h2>
+          <p>
+            Cookie 是您在瀏覽網站時，網站伺服器儲存在您裝置上的小型文字檔。
+            如果您不希望被追蹤，您可以在瀏覽器設定中隨時停用 Cookie。這不會影響您閱讀本館的故事，但可能會有少部分輔助功能（例如記住瀏覽時的滾動位置）無法正常使用。
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-bold text-ink mb-2 text-lg">3. 政策修改</h2>
+          <p>
+            本館保留隨時修改本聲明的權利。
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-ink/20 text-center">
+          <p class="font-mono text-xs opacity-60">LAST_UPDATED: {new Date().toISOString().split('T')[0]}</p>
+          <a href="/" class="inline-block mt-4 px-4 py-2 border-2 border-ink font-bold font-mono text-sm hover:bg-ink hover:text-white transition-colors">
+            RETURN_TO_LOBBY
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

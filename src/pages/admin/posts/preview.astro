@@ -1,0 +1,8 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { AdminPreviewApp } from '../../../components/admin/AdminPreviewApp';
+---
+
+<Layout title="文章即時預覽 | 花花巴尼拔圖書館" noindex={true}>
+  <AdminPreviewApp client:only="react" />
+</Layout>

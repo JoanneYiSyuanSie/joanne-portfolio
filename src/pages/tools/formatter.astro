@@ -1,0 +1,8 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Formatter } from '../../components/pages/Formatter.tsx';
+---
+
+<Layout title="自動排版小工具 | 花花巴尼拔圖書館" noindex={true}>
+  <Formatter client:idle />
+</Layout>

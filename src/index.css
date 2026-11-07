@@ -1,0 +1,215 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Noto Serif TC", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-paper: #F5F4EE;
+  --color-ink: #0A0A0A;
+  --color-ink-light: #4A4A4A;
+  --color-accent: var(--theme-accent, #A06540);
+}
+
+@layer base {
+  body {
+    @apply bg-[#F0EBE3] text-ink selection:bg-accent selection:text-white;
+    background-image: radial-gradient(#E0D8C8 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
+@layer components {
+  .brutalist-block {
+    @apply bg-paper border-4 border-ink shadow-[12px_12px_0_0_#0A0A0A];
+  }
+
+  .brutalist-button {
+    @apply bg-white border-4 border-ink px-4 py-2 font-mono font-bold text-ink shadow-[4px_4px_0_0_#0A0A0A] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:translate-x-[4px] active:translate-y-[4px];
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 35s linear infinite;
+  }
+
+  @keyframes modalIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .animate-modal-in {
+    animation: modalIn 0.25s ease-out;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.3);
+    }
+  }
+
+  .animate-pulse-dot {
+    animation: pulseDot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  html.dot-dismissed .newsletter-dot {
+    display: none !important;
+  }
+
+  html.dot-dismissed .newsletter-dot-fallback {
+    display: block !important;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-paper border-l-4 border-ink;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-ink border-2 border-paper;
+  }
+
+  .prose-hr-dots {
+    @apply border-none text-center my-16;
+  }
+
+  .prose-hr-dots::after {
+    content: "///";
+    @apply font-mono text-xl text-ink/30 tracking-[1em] pl-[1em] block font-bold;
+  }
+
+  /* 防雷劇透樣式 */
+  .spoiler {
+    background-color: var(--color-ink);
+    color: var(--color-ink);
+    cursor: help;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    padding: 0 4px;
+    border-radius: 2px;
+    user-select: none;
+    display: inline;
+  }
+
+  .spoiler.is-revealed {
+    background-color: transparent !important;
+    color: inherit !important;
+    user-select: text;
+    cursor: text;
+  }
+}
+
+/* 中文排版優化：標點符號避頭尾 */
+.prose {
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: break-word;
+  text-align: left;
+  /* 針對不同瀏覽器的優化 */
+  hyphens: none;
+}
+
+@media (min-width: 768px) {
+  .prose.prose-layout-justify {
+    text-align: justify;
+  }
+}
+
+/* CMS Preview Fixes */
+.preview-container {
+  @apply bg-paper p-8 min-h-screen font-serif text-ink;
+}
+
+.preview-container h1 {
+  @apply text-4xl font-black mb-8 border-l-8 border-accent pl-6;
+}
+
+.empty-line {
+  @apply h-6;
+}
+
+/* Disable Astro's default root crossfade to keep the sidebar snappy */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+#main-scroll-container {
+  view-transition-name: main-area;
+}
+
+::view-transition-old(main-area) {
+  animation: slideOutUp 0.2s ease-out both;
+}
+
+::view-transition-new(main-area) {
+  animation: slideInUp 0.2s ease-out 0.2s both;
+}
+
+/* Ensure the browser keeps the transition alive for the full 0.5s sequence */
+::view-transition-group(main-area) {
+  animation-duration: 0.4s;
+}
+
+@keyframes slideOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 強制移除 Typography 插件生成的引號 */
+.prose blockquote p:first-of-type::before {
+  content: none !important;
+}
+.prose blockquote p:last-of-type::after {
+  content: none !important;
+}
+.prose blockquote::before {
+  content: none !important;
+}
+.prose blockquote::after {
+  content: none !important;
+}
