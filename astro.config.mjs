@@ -31,7 +31,8 @@ try {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://joanne-portfolio.dev',
+  site: 'https://joanneyisyuansie.github.io',
+  base: '/joanne-portfolio',
   trailingSlash: 'never',
   build: {
     format: 'file'

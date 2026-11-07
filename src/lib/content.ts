@@ -311,7 +311,8 @@ export function getCategories(): CategoryInfo[] {
 
 /** Build a URL path for a post: /archive/[categorySlug]/[slug] */
 export function getPostUrl(post: PostMeta): string {
-  return `/archive/${post.categorySlug}/${post.slug}`;
+  const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+  return `${base}/archive/${post.categorySlug}/${post.slug}`;
 }
 
 // ---------- Site Config ----------

@@ -138,6 +138,12 @@ export function Layout({ children, currentPath }: LayoutProps) {
     }
   };
 
+  const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+  const withBase = (path: string) => {
+    if (path === '/') return base || '/';
+    return path.startsWith(base) ? path : `${base}${path}`;
+  };
+
   return (
     <div className="min-h-screen p-4 md:p-8 flex items-center justify-center">
       <div className="w-full max-w-7xl mx-auto brutalist-block flex flex-col md:flex-row min-h-[85vh] md:h-[85vh] overflow-hidden relative">
@@ -145,7 +151,7 @@ export function Layout({ children, currentPath }: LayoutProps) {
         {/* Sidebar / Index System */}
         <aside className="md:w-72 flex-shrink-0 flex flex-col border-b-4 md:border-b-0 md:border-r-4 border-ink bg-[#FFFDF9] relative z-10">
 
-          <a href="/" className="block shrink-0 p-6 md:p-8 border-b-4 border-ink hover:bg-ink group overflow-hidden relative transition-colors duration-300">
+          <a href={base || "/"} className="block shrink-0 p-6 md:p-8 border-b-4 border-ink hover:bg-ink group overflow-hidden relative transition-colors duration-300">
             {/* Background noise texture effect on hover */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-10 pointer-events-none transition-opacity bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjRjJGMEU5Ij48L3JlY3Q+CiA8cGF0aCBkPSJNMCAwdjhoOHYtOEgwem00IDRWMGgydjRIMHoiIGZpbGw9IiNFMEQ4QzgiIGZpbGwtb3BhY2l0eT0iLjMiPjwvcGF0aD4KPC9zdmc+')]"></div>
 
@@ -161,14 +167,15 @@ export function Layout({ children, currentPath }: LayoutProps) {
 
           <nav className="flex-1 flex flex-row md:flex-col overflow-x-auto md:overflow-y-auto custom-scrollbar divide-x-4 md:divide-x-0 md:divide-y-4 divide-ink">
             {NAV_ITEMS.map((item) => {
-              const isActive = currentPath === item.path || (item.path !== "/" && currentPath.startsWith(item.path));
+              const cleanCurrent = currentPath.startsWith(base) ? (currentPath.slice(base.length) || '/') : currentPath;
+              const isActive = cleanCurrent === item.path || (item.path !== "/" && cleanCurrent.startsWith(item.path));
               // Use the last visited sub-path if available for this section
               const targetPath = item.path === "/" ? "/" : (lastVisited[item.path] || item.path);
               
               return (
                 <a
                   key={item.path}
-                  href={targetPath}
+                  href={withBase(targetPath)}
                   className={cn(
                     "flex-1 md:flex-none shrink-0 flex items-center md:items-start md:flex-col pl-4 pr-2 py-4 md:p-6 group relative overflow-hidden transition-colors",
                     isActive ? "bg-accent text-white" : "hover:bg-ink hover:text-white text-ink"
@@ -222,7 +229,7 @@ export function Layout({ children, currentPath }: LayoutProps) {
               />
             </div>
             <div className="p-4 font-mono text-[10px] uppercase font-bold text-ink/80 leading-none h-10 flex items-center">
-              <a href="/privacy" className="hover:text-ink hover:underline decoration-ink/30 underline-offset-4 transition-all cursor-help" title="SYS_PRIVACY_PROTOCOL">
+              <a href={`${base}/privacy`} className="hover:text-ink hover:underline decoration-ink/30 underline-offset-4 transition-all cursor-help" title="SYS_PRIVACY_PROTOCOL">
                 SYS.MSG: {sysMsg}
               </a>
             </div>

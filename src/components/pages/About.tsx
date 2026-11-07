@@ -27,7 +27,7 @@ export function About() {
             <div className="absolute inset-0 bg-ink transform translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300"></div>
             <div className="absolute inset-0 bg-white border-4 border-ink p-4 group-hover:-translate-x-2 group-hover:-translate-y-2 transition-transform duration-300 flex items-center justify-center overflow-hidden">
               <img
-                src="/joanne-logo.svg"
+                src={`${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}/joanne-logo.svg`}
                 alt={`${config.author} Monogram`}
                 className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
               />

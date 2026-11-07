@@ -89,7 +89,7 @@ export function Home() {
             <span className="w-4 h-4 bg-accent inline-block shadow-[2px_2px_0_0_#0A0A0A]"></span>
             RECENT_FILES
           </h2>
-          <a href="/archive" className="brutalist-button px-4 py-2 text-sm shrink-0">
+          <a href={`${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}/archive`} className="brutalist-button px-4 py-2 text-sm shrink-0">
             VIEW_ALL <span className="font-mono ml-2">→</span>
           </a>
         </div>
