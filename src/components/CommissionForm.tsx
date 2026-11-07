@@ -138,7 +138,7 @@ export function CommissionForm() {
             訊息已成功送出
           </h3>
           <p className="font-sans text-sm font-bold text-ink leading-relaxed max-w-xs sm:max-w-sm mx-auto">
-            館長將於 48 小時內進行處理與回覆，感謝您的耐心等候。
+            Joanne 將於 48 小時內進行處理與回覆，感謝您的耐心等候。
           </p>
         </div>
 
@@ -225,16 +225,16 @@ export function CommissionForm() {
       {/* 3. 聯絡方式 */}
       <div className="space-y-2">
         <label className="block font-sans font-black text-lg text-ink">
-          您的噗浪帳號或Email <span className="text-[#D9453B]">*</span>
+          您的 Email <span className="text-[#D9453B]">*</span>
         </label>
-        <p className="text-sm font-bold text-ink-light font-sans mb-2">您偏好的聯絡方式</p>
+        <p className="text-sm font-bold text-ink-light font-sans mb-2">您偏好的聯絡信箱</p>
         <input
-          type="text"
+          type="email"
           required
           value={data.contact}
           onChange={(e) => handleChange("contact", e.target.value)}
           className="w-full p-3 border-2 border-ink bg-white focus:outline-none focus:border-accent focus:shadow-[4px_4px_0_0_var(--theme-accent)] transition-all font-sans"
-          placeholder="簡答文字"
+          placeholder="例如：yourname@example.com"
         />
       </div>
 

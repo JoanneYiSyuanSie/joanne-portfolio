@@ -70,12 +70,13 @@ export function Home() {
 
         <h1 className="font-serif text-3xl md:text-5xl font-black leading-snug">
           歡迎來到<br className="hidden md:block" />
-          <ScrambleText text="JOANNE ARCHIVE" />
+          <ScrambleText text="JOANNE'S JOURNAL" />
         </h1>
 
         <p className="font-sans text-lg md:text-xl font-bold text-ink-light leading-relaxed max-w-2xl border-l-4 border-accent pl-6">
           你好，我是 Joanne。<br />
-          專注於現代前端開發、靜態與邊緣混合渲染架構與互動體驗設計。
+          具備 2 年以內行銷經驗，專注於 SEO、內容行銷策略與資訊架構。<br />
+          這是我為了深入實踐 Technical SEO、Core Web Vitals 與行銷自動化而親手搭建的成果展示站。
         </p>
       </section>
 

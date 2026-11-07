@@ -32,19 +32,15 @@ export function Commission() {
               </li>
               <li className="flex gap-4">
                 <span className="text-accent font-black">{">"}</span>
-                <p>專案流程：需求洽詢與評估 → 規格確認與時程報價 → 系統架構規劃與開發 → 整合測試與上線交付。</p>
+                <p>專長範疇：搜尋引擎優化（SEO）、內容行銷策略、資訊架構規劃（Taxonomy）、Technical SEO 檢視與跨團隊工程溝通。</p>
               </li>
               <li className="flex gap-4">
                 <span className="text-accent font-black">{">"}</span>
-                <p>技術範疇：現代 Web 應用開發、前端架構設計（Astro、React 19、TypeScript）、CSS 動態設計系統與全端效能優化。</p>
+                <p>合作模式：積極評估全職行銷職缺（SEO、內容行銷、成長行銷），亦歡迎專案合作或行銷策略交流。</p>
               </li>
               <li className="flex gap-4">
                 <span className="text-accent font-black">{">"}</span>
-                <p>合作模式：支援全職遠端／在職職缺評估、獨立專案承包、技術顧問與程式碼審查（Code Review）。</p>
-              </li>
-              <li className="flex gap-4">
-                <span className="text-accent font-black">{">"}</span>
-                <p>回覆時程：收到諮詢後，通常於 1 至 2 個工作天內回覆，敬請留意您的電子信箱。</p>
+                <p>回覆時程：收到訊息後，通常於 1 至 2 個工作天內回覆，敬請留意您的電子信箱。</p>
               </li>
             </ul>
           </div>

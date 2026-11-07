@@ -35,11 +35,11 @@ export function Archive({
     <div className="p-0 flex flex-col h-full min-h-full">
       <header className="px-8 py-10 bg-black text-white border-b-4 border-black relative shrink-0 z-50" style={{ viewTransitionName: 'archive-header' }}>
         <h1 className="font-mono text-3xl font-black mb-2 tracking-widest">
-          DATABASE <span className="text-accent">___</span>
+          ARTICLES <span className="text-accent">___</span>
         </h1>
         <p className="font-sans font-bold opacity-80 max-w-xl mb-6">
           RECORD_COUNT = {posts.length}; // ACCESS: GRANTED
-          <br/>選擇你要解密的紀錄。
+          <br/>收錄所有 SEO、內容策略與行銷自動化實務文章。
         </p>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

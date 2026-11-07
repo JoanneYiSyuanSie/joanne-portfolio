@@ -99,27 +99,27 @@ const CACHE_KEY = "joanne_signals_cache_v1";
 const MOCK_SIGNALS: ThreadPost[] = [
   {
     id: "sig_1",
-    text: "完成全新 Neo-Brutalist 設計系統與主題切換器實作！支援大地色、曜石黑、極簡紙色與鼠尾草綠四種風格。",
+    text: "完成了 Core Web Vitals 與靜態載入效能優化測試，Lighthouse Performance 與 SEO 雙雙達到滿分 ✨",
     timestamp: new Date().toISOString(),
     media_type: "TEXT_POST",
-    permalink: "https://github.com/joanne-dev",
-    username: "joanne.dev"
+    permalink: "https://github.com/JoanneYiSyuanSie/joanne-portfolio",
+    username: "joanneyisyuansie"
   },
   {
     id: "sig_2",
-    text: "重構 Content Layer，透過 Vite import.meta.glob 進行建置期 Markdown 解析，首屏載入速度提升 40% ✨",
+    text: "重構網站內容分類學（Taxonomy）與內部連結結構，並配置規範化語意 URL 與麵包屑導航。",
     timestamp: new Date(Date.now() - 86400000 * 2).toISOString(),
     media_type: "TEXT_POST",
-    permalink: "https://github.com/joanne-dev",
-    username: "joanne.dev"
+    permalink: "https://github.com/JoanneYiSyuanSie/joanne-portfolio",
+    username: "joanneyisyuansie"
   },
   {
     id: "sig_3",
-    text: "探索 Cloudflare Pages Functions 邊緣函式路由與分散式 D1 資料庫整合，Serverless 架構運作良好。",
+    text: "實裝並率先導入 llms.txt 規範，方便 ChatGPT Search 與 Perplexity 等生成式 AI 搜尋引擎檢索引用。",
     timestamp: new Date(Date.now() - 86400000 * 5).toISOString(),
     media_type: "TEXT_POST",
-    permalink: "https://github.com/joanne-dev",
-    username: "joanne.dev"
+    permalink: "https://github.com/JoanneYiSyuanSie/joanne-portfolio",
+    username: "joanneyisyuansie"
   }
 ];
 

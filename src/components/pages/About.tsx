@@ -13,7 +13,7 @@ export function About() {
         </div>
 
         <h2 className="font-mono text-3xl font-black mb-2 tracking-widest relative z-10 text-ink">
-          ENGINEER_PROFILE <span className="text-accent">___</span>
+          MARKETER_PROFILE <span className="text-accent">___</span>
         </h2>
         <p className="font-sans font-bold opacity-80 max-w-xl text-ink relative z-10">
           關於 Joanne。
@@ -36,7 +36,7 @@ export function About() {
           
           <h1 className="font-serif text-4xl font-black text-ink">{config.author}</h1>
           <div className="font-mono text-xs font-bold text-ink bg-white border-2 border-ink px-2 py-1 mt-4 shadow-[2px_2px_0_0_#0A0A0A] relative z-10">
-            ENGINEER / ARCHITECT
+            CONTENT STRATEGY / SEO
           </div>
         </section>
 

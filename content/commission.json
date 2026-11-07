@@ -2,23 +2,23 @@
   "commission": {
     "surprisePackOpen": true,
     "customCommissionOpen": true,
-    "surprisePackReferenceUrl": "/archive/architecture/01-astro-hybrid-architecture",
+    "surprisePackReferenceUrl": "/archive/seo/why-astro-for-seo",
     "googleAppsScriptUrl": "",
     "types": [
       {
-        "id": "全端專案開發",
-        "label": "1. 現代 Web / 前端專案開發",
-        "description": "- 包含系統架構規劃、響應式 UI 切版、狀態管理與 RESTful / GraphQL API 整合。\n- 技術棧涵蓋 Astro、React 19、TypeScript 與 Tailwind CSS。"
+        "id": "SEO與內容行銷",
+        "label": "1. SEO 策略規劃與內容行銷",
+        "description": "- 包含關鍵字研究、內容主題架構（Topic Clusters）、長青內容規劃與搜尋意圖分析。\n- 專注提升自然搜尋流量與品牌長期能見度。"
       },
       {
-        "id": "效能優化諮詢",
-        "label": "2. 網站效能優化與架構遷移",
-        "description": "- Core Web Vitals 指標提升、靜態生成 (SSG) 策略優化、邊緣運算整合與 SEO 結構化資料建置。"
+        "id": "網站體質與效能診斷",
+        "label": "2. Technical SEO 與網站體驗檢視",
+        "description": "- Core Web Vitals 載入體驗檢視、Sitemap / 結構化資料規劃、URL 規範化與爬蟲友善度優化建議。"
       },
       {
-        "id": "職缺與合作洽詢",
-        "label": "3. 職缺邀約 / 技術交流",
-        "description": "若有全職/兼職職缺機會、技術交流或專案合作意向，歡迎透過此表單直接聯絡。"
+        "id": "職缺與交流洽詢",
+        "label": "3. 正職職缺邀約 / 行銷交流",
+        "description": "若有全職行銷相關職缺機會、合作案評估或 SEO 策略交流，歡迎隨時透過表單聯絡。"
       }
     ]
   }

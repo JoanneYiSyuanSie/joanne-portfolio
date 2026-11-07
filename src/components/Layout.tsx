@@ -6,9 +6,9 @@ import { NewsletterModal } from "./NewsletterModal";
 
 const NAV_ITEMS = [
   { path: "/", id: "01", label: "大廳", subtitle: "Lobby" },
-  { path: "/archive", id: "02", label: "典藏", subtitle: "Archive" },
+  { path: "/archive", id: "02", label: "文章", subtitle: "Articles" },
   { path: "/social", id: "03", label: "動態", subtitle: "Social" },
-  { path: "/commission", id: "04", label: "合作", subtitle: "Inquiry" },
+  { path: "/commission", id: "04", label: "合作", subtitle: "Contact" },
   { path: "/about", id: "05", label: "關於", subtitle: "About" },
 ];
 
@@ -238,7 +238,7 @@ export function Layout({ children, currentPath }: LayoutProps) {
 
         {/* Main Content Area */}
         <main className="flex-1 bg-[#FFFDF9] relative flex flex-col overflow-hidden">
-          <Marquee text="* OPEN FOR COLLABORATION * WELCOME TO JOANNE ARCHIVE * MODERN WEB ARCHITECTURE *" className="border-b-4 border-ink flex-shrink-0" />
+          <Marquee text="* CONTENT STRATEGY * TECHNICAL SEO NOTES * MARKETING AUTOMATION * JOANNE JOURNAL *" className="border-b-4 border-ink flex-shrink-0" />
 
           <div id="main-scroll-container" style={{ viewTransitionName: 'main-area' }} className="flex-1 relative flex flex-col overflow-y-auto custom-scrollbar">
             {children}

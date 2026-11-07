@@ -1,7 +1,7 @@
 {
-  "siteName": "Joanne's Archive",
-  "siteNameEn": "Joanne Portfolio & Architecture",
-  "siteDescription": "Joanne 的個人技術作品集與架構展示站。專注於現代前端工程、邊緣運算與互動設計。",
+  "siteName": "Joanne's Journal",
+  "siteNameEn": "Content Strategy & Technical SEO",
+  "siteDescription": "行銷人 Joanne 的個人實務站。專注於 Technical SEO、內容分類學與行銷自動化流程實務。",
   "author": "Joanne",
-  "authorBio": "軟體工程師 / 前端架構探索者。\n\n熱衷於現代 Web 技術棧（Astro、React、TypeScript、Tailwind CSS）與效能優化。\n追求簡潔優雅的系統架構與具備視覺張力的使用者介面。"
+  "authorBio": "行銷專員（經歷 2 年內），專注於 SEO 與內容行銷策略。\n\n深信好的內容策略必須與網站底層架構緊密結合。為了徹底搞懂搜尋引擎爬取邏輯、網頁載入指標（Core Web Vitals）與自動化分發流程，親自動手實作並運營此站點，深入探索從資訊架構、Technical SEO 到行銷自動化的全流程。"
 }
