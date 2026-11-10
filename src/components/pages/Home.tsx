@@ -57,7 +57,7 @@ export function Home() {
   };
 
   return (
-    <div className="p-8 md:p-12 xl:p-16 space-y-16 relative min-h-full">
+    <div className="px-8 md:px-12 xl:px-16 pt-8 md:pt-12 xl:pt-16 space-y-16 relative min-h-full">
       <section className="space-y-8">
         <button 
           onClick={handleDotClick}
@@ -100,6 +100,9 @@ export function Home() {
             <PostCard key={post.slug} post={post} variant={variants[i % 2]} />
           ))}
         </div>
+
+        {/* Bottom spacer: fixed gap below the cards — the parent's bottom padding is lost when the scroll area overflows */}
+        <div aria-hidden="true" className="h-8 md:h-12 xl:h-16" />
       </section>
 
     </div>
