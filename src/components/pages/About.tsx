@@ -5,7 +5,7 @@ export function About() {
   const config = getSiteConfig();
 
   return (
-    <div className="p-0">
+    <div className="p-0 min-h-full flex flex-col">
       <header className="px-8 py-10 bg-[#FFFDF9] border-b-4 border-ink relative overflow-hidden">
         {/* Background Decorative */}
         <div className="absolute -right-10 -top-10 text-[15rem] font-serif font-black text-ink opacity-5 select-none leading-none">
@@ -20,7 +20,7 @@ export function About() {
         </p>
       </header>
 
-      <div className="grid md:grid-cols-12">
+      <div className="grid md:grid-cols-12 flex-1">
         {/* Logo Section */}
         <section className="p-8 md:col-span-5 lg:col-span-4 border-b-4 md:border-b-0 md:border-r-4 border-ink bg-paper flex flex-col items-center justify-center">
           <div className="relative group w-48 h-48 sm:w-64 sm:h-64 mb-8">
@@ -54,7 +54,7 @@ export function About() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2">
+          <div className="grid sm:grid-cols-2 flex-1">
             {/* Social Links */}
             <div className="p-8 lg:p-12 border-b-4 sm:border-b-0 sm:border-r-4 border-ink bg-ink text-white">
               <div className="font-mono text-xs font-bold text-white/50 mb-6 border-b border-white/20 pb-2">
