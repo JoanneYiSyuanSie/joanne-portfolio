@@ -121,7 +121,7 @@ export function AdminPostsApp() {
       // If remote returned nothing (e.g. local dev fallback), load from localStorage
       if (loadedPosts.length === 0) {
         try {
-          const localSaved = localStorage.getItem('adabanipal_admin_posts_local');
+          const localSaved = localStorage.getItem('joanne_admin_posts_local');
           if (localSaved) {
             loadedPosts = JSON.parse(localSaved);
           }
@@ -255,7 +255,7 @@ export function AdminPostsApp() {
       }
 
       if (usedLocalFallback) {
-        const localKey = 'adabanipal_admin_posts_local';
+        const localKey = 'joanne_admin_posts_local';
         let localList: PostItem[] = [];
         try {
           const saved = localStorage.getItem(localKey);
@@ -340,7 +340,7 @@ export function AdminPostsApp() {
   // Preview via localStorage
   const handlePreview = () => {
     try {
-      localStorage.setItem('adabanipal_admin_preview', JSON.stringify(currentPost));
+      localStorage.setItem('joanne_admin_preview', JSON.stringify(currentPost));
       window.open('/admin/posts/preview', '_blank');
     } catch (e) {
       console.error('Preview error:', e);
@@ -429,7 +429,7 @@ export function AdminPostsApp() {
           p.id && selectedPostIds.includes(p.id) ? { ...p, status: action } : p
         );
         try {
-          localStorage.setItem('adabanipal_admin_posts_local', JSON.stringify(updated));
+          localStorage.setItem('joanne_admin_posts_local', JSON.stringify(updated));
         } catch { }
         return updated;
       });
@@ -484,7 +484,7 @@ export function AdminPostsApp() {
           .replace(/<[^>]+>/g, '')
           .trim();
         resultData = {
-          seoTitle: `${currentPost.title ? `《${currentPost.title.replace(/[《》]/g, '')}》` : '新作'}｜${currentPost.category || '短篇小說'}｜花花巴尼拔圖書館`,
+          seoTitle: `${currentPost.title ? `《${currentPost.title.replace(/[《》]/g, '')}》` : '新作'}｜${currentPost.category || '短篇小說'}| Joanne's Journal`,
           seoDescription: cleanContent.slice(0, 140) + '...',
           suggestedTags: [currentPost.category || '短篇小說', '文字創作'],
         };
@@ -559,7 +559,7 @@ export function AdminPostsApp() {
             onClick={() => setView('list')}
             className="font-serif font-bold text-lg md:text-xl tracking-wide hover:text-[#059669] transition-colors flex items-center gap-2 cursor-pointer"
           >
-            <span>花花巴尼拔圖書館</span>
+            <span>Joanne's Journal</span>
             <span className="text-xs font-mono font-normal px-2 py-0.5 border border-[#E5E0D8] text-[#666666] rounded-sm">
               後台管理
             </span>

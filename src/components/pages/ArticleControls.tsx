@@ -14,7 +14,7 @@ export function ArticleControls({ slug }: { slug: string }) {
   // Load saved preferences
   useEffect(() => {
     setIsClient(true);
-    const savedAlign = localStorage.getItem("adabanipal_layout_align") as LayoutAlign | null;
+    const savedAlign = localStorage.getItem("joanne_layout_align") as LayoutAlign | null;
     if (savedAlign === "left" || savedAlign === "justify") {
       setLayoutAlign(savedAlign);
     }
@@ -37,7 +37,7 @@ export function ArticleControls({ slug }: { slug: string }) {
 
   const handleSetLayoutAlign = (align: LayoutAlign) => {
     setLayoutAlign(align);
-    localStorage.setItem("adabanipal_layout_align", align);
+    localStorage.setItem("joanne_layout_align", align);
     trackEvent("change_layout_align", { align, slug });
   };
 

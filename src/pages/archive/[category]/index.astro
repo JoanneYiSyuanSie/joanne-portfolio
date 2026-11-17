@@ -16,11 +16,11 @@ const posts = getPostsByCategory(category.slug);
 const allCategories = getCategories();
 const totalCount = allCategories.reduce((sum, c) => sum + c.count, 0);
 
-const categoryDescription = category.description || `花花巴尼拔圖書館《${category.name}》系列作品目錄。收錄創作者謊花於此系列發布的所有章節與閱讀清單，共 ${posts.length} 篇作品。`;
+const categoryDescription = category.description || `${category.name}分類的文章目錄，共 ${posts.length} 篇。`;
 ---
 
 <Layout 
-  title={`${category.name} | 藏書 | 花花巴尼拔圖書館`}
+  title={`${category.name} | Joanne's Journal`}
   description={categoryDescription}
 >
   <Archive client:idle posts={posts} categories={allCategories} currentCategorySlug={category.slug} currentCategoryName={category.name} totalCount={totalCount} />

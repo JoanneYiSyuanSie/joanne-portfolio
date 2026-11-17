@@ -41,6 +41,7 @@ export function CategoryDropdown({
   }, []);
 
   const displayLabel = currentName || "全部";
+  const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -68,7 +69,7 @@ export function CategoryDropdown({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {/* "全部" option */}
             <a
-              href="/archive"
+              href={`${base}/archive`}
               className={cn(
                 "font-mono text-xs font-bold px-3 py-2 border-2 transition-all block whitespace-nowrap truncate",
                 currentSlug === null
@@ -82,7 +83,7 @@ export function CategoryDropdown({
             {categories.map((cat) => (
               <a
                 key={cat.slug}
-                href={`/archive/${cat.slug}`}
+                href={`${base}/archive/${cat.slug}`}
                 className={cn(
                   "font-mono text-xs font-bold px-3 py-2 border-2 transition-all block whitespace-nowrap truncate",
                   currentSlug === cat.slug

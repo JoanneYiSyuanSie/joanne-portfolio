@@ -41,6 +41,7 @@ const INITIAL_DATA: FormData = {
 
 export function CommissionForm() {
   const config = getSiteConfig();
+  const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
   const [data, setData] = useState<FormData>(INITIAL_DATA);
   const [status, setStatus] = useState<"IDLE" | "SUBMITTING" | "SUCCESS" | "ERROR">("IDLE");
   const [errorMessage, setErrorMessage] = useState("");
@@ -313,7 +314,7 @@ export function CommissionForm() {
                   <span className="text-[10px] font-mono bg-ink/10 text-ink px-1 border border-ink/20 rounded-sm">?</span>
                   {type.id === "驚喜包" && isSurprisePackOpen && config.commission.surprisePackReferenceUrl && (
                     <a
-                      href={config.commission.surprisePackReferenceUrl}
+                      href={`${base}${config.commission.surprisePackReferenceUrl}`}
                       target="_blank"
                       rel="noreferrer"
                       className="text-xs text-accent underline hover:text-ink font-mono font-bold ml-1"
@@ -327,7 +328,7 @@ export function CommissionForm() {
                       目前未開放
                       {config.commission.surprisePackReferenceUrl && (
                         <a
-                          href={config.commission.surprisePackReferenceUrl}
+                          href={`${base}${config.commission.surprisePackReferenceUrl}`}
                           target="_blank"
                           rel="noreferrer"
                           className="underline hover:text-accent ml-1"
@@ -367,7 +368,7 @@ export function CommissionForm() {
             <div className="p-3 bg-paper border-2 border-ink flex items-center justify-between text-xs sm:text-sm font-bold">
               <span className="text-ink">✦ 填單前請先確認本期驚喜包規則與主題：</span>
               <a
-                href={config.commission.surprisePackReferenceUrl}
+                href={`${base}${config.commission.surprisePackReferenceUrl}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1 text-accent underline hover:text-ink font-mono whitespace-nowrap ml-2"

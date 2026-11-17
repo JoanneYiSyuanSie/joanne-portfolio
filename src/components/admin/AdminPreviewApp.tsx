@@ -10,7 +10,7 @@ export function AdminPreviewApp() {
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('adabanipal_admin_preview');
+      const saved = localStorage.getItem('joanne_admin_preview');
       if (saved) {
         setPost(JSON.parse(saved));
       }

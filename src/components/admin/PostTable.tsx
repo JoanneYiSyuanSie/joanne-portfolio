@@ -218,7 +218,7 @@ export function PostTable({
                       </button>
                       <button
                         onClick={() => {
-                          localStorage.setItem('adabanipal_admin_preview', JSON.stringify(post));
+                          localStorage.setItem('joanne_admin_preview', JSON.stringify(post));
                           window.open('/admin/posts/preview', '_blank');
                         }}
                         title="預覽"

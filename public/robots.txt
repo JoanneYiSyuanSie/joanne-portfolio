@@ -4,4 +4,4 @@ Allow: /
 # Do not index the Decap CMS admin interface
 Disallow: /admin/
 
-Sitemap: https://joanne-portfolio.dev/sitemap-index.xml
+Sitemap: https://joanneyisyuansie.github.io/joanne-portfolio/sitemap-index.xml
