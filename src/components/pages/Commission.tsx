@@ -5,8 +5,8 @@ export function Commission() {
 
 
   return (
-    <div className="p-0">
-      <header className="px-8 py-10 border-b border-black/15">
+    <div className="p-0 max-w-5xl mx-auto w-full">
+      <header className="px-6 md:px-8 pt-10 md:pt-14 pb-8 border-b border-black/15">
         <h1 className="font-serif text-4xl font-semibold mb-2">
           聯絡
         </h1>

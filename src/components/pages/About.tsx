@@ -16,7 +16,7 @@ export function About() {
 
       <div className="grid md:grid-cols-12 flex-1">
         {/* Name Section */}
-        <section className="p-6 md:p-8 md:col-span-5 lg:col-span-4 border-b md:border-b-0 md:border-r border-black/15">
+        <section className="p-6 md:p-8 md:col-span-5 lg:col-span-4 border-b md:border-b-0 border-black/15">
           <h1 className="font-serif text-4xl font-semibold text-ink">{config.author}</h1>
           <div className="font-sans text-xs tracking-[0.2em] text-ink-light mt-4">
             CONTENT STRATEGY / SEO
@@ -27,7 +27,7 @@ export function About() {
         <section className="md:col-span-7 lg:col-span-8 flex flex-col">
 
           {/* Bio */}
-          <div className="p-6 md:p-8 lg:p-12 border-b border-black/15">
+          <div className="p-6 md:p-8 lg:p-12">
             <div className="font-sans text-xs tracking-[0.2em] text-ink-light mb-6">
               簡介
             </div>
@@ -38,7 +38,7 @@ export function About() {
 
           <div className="grid sm:grid-cols-2 flex-1">
             {/* Social Links */}
-            <div className="p-6 md:p-8 lg:p-12 border-b sm:border-b-0 sm:border-r border-black/15">
+            <div className="p-6 md:p-8 lg:p-12 border-b sm:border-b-0 border-black/15">
               <div className="font-sans text-xs tracking-[0.2em] text-ink-light mb-6 border-b border-black/15 pb-2">
                 社群連結
               </div>
