@@ -1,7 +1,6 @@
 import { useState, FormEvent } from "react";
 import { cn } from "../lib/utils";
 import { getSiteConfig } from "../lib/content";
-import { trackEvent } from "../lib/analytics";
 
 type CommissionType = "驚喜包" | "客製化" | "詢問";
 
@@ -61,69 +60,12 @@ export function CommissionForm() {
     });
   };
 
+  // 展示版本：這個表單只是功能示範，沒有後端可以收。
+  // 送出時不發任何請求，直接說明沒有送出。
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
-    setStatus("SUBMITTING");
-
-    try {
-      /*
-      // --- 舊版 Google Apps Script 提交邏輯 (已註解保留) ---
-      const oldUrl = config.commission.googleAppsScriptUrl;
-      if (!oldUrl) {
-        setStatus("ERROR");
-        setErrorMessage("SYS_ERR: Webhook URL not configured.");
-        return;
-      }
-      const response = await fetch(oldUrl, {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-      // ----------------------------------------
-      */
-
-      // --- 新版 Cloudflare Pages 提交邏輯 ---
-      const url = "/api/commission";
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        let msg = `Server HTTP ${response.status}`;
-        try {
-          const contentType = response.headers.get("content-type");
-          if (contentType && contentType.includes("application/json")) {
-            const errData = await response.json();
-            msg = errData.message || msg;
-          }
-        } catch (e) { }
-        throw new Error(msg);
-      }
-
-      const contentType = response.headers.get("content-type");
-      let result;
-      if (contentType && contentType.includes("application/json")) {
-        result = await response.json();
-      } else {
-        throw new Error("API 端點回應格式異常 (本地開發無 Pages Functions 環境)");
-      }
-
-      if (result.result === "success") {
-        setStatus("SUCCESS");
-        trackEvent("commission_submit", {
-          commission_type: data.commissionType
-        });
-        setData(INITIAL_DATA); // Clear form
-      } else {
-        throw new Error(result.message || "Unknown error occurred");
-      }
-    } catch (err: any) {
-      console.error("Form submission error:", err);
-      setStatus("ERROR");
-      setErrorMessage("TRANSMISSION_FAILED: " + (err.message || "Please try again later."));
-    }
+    setStatus("ERROR");
+    setErrorMessage("這是功能示範，表單內容沒有送出。如需聯繫，請直接寄信至 delphinium0121@gmail.com。");
   };
 
   if (status === "SUCCESS") {
@@ -161,8 +103,8 @@ export function CommissionForm() {
       {status === "ERROR" && (
         <div className="border-2 border-ink bg-paper p-4 font-mono text-xs sm:text-sm shadow-[4px_4px_0_0_#0A0A0A] border-l-8 border-l-ink space-y-1">
           <div className="text-ink font-bold flex items-center gap-2">
-            <span className="bg-ink text-white px-1.5 py-0.5 text-[10px]">ERROR</span>
-            <span>TRANSMISSION_FAILED</span>
+            <span className="bg-ink text-white px-1.5 py-0.5 text-[10px]">NOTICE</span>
+            <span>功能示範</span>
           </div>
           <p className="text-ink-light font-sans font-bold text-sm leading-snug pt-1">
             {errorMessage}

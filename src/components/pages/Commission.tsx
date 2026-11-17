@@ -32,10 +32,6 @@ export function Commission() {
               </li>
               <li className="flex gap-4">
                 <span className="text-accent font-black">{">"}</span>
-                <p>專長範疇：搜尋引擎優化（SEO）、內容行銷策略、資訊架構規劃（Taxonomy）、Technical SEO 檢視與跨團隊工程溝通。</p>
-              </li>
-              <li className="flex gap-4">
-                <span className="text-accent font-black">{">"}</span>
                 <p>合作模式：積極評估全職行銷職缺（SEO、內容行銷、成長行銷），亦歡迎專案合作或行銷策略交流。</p>
               </li>
               <li className="flex gap-4">
@@ -47,6 +43,14 @@ export function Commission() {
         </section>
 
         <section className="p-8 bg-paper flex flex-col justify-center min-h-[480px]">
+          <div className="max-w-xl mx-auto w-full mb-6 border-2 border-ink bg-white p-4 shadow-[4px_4px_0_0_#0A0A0A]">
+            <div className="font-mono text-[10px] font-bold mb-2">
+              <span className="bg-ink text-white px-1.5 py-0.5">功能示範</span>
+            </div>
+            <p className="font-sans text-sm font-bold text-ink leading-relaxed">
+              這個表單只是功能示範，送出後不會真的寄出。如需聯繫，請直接寄信至 <a href="mailto:delphinium0121@gmail.com" className="text-accent underline font-mono">delphinium0121@gmail.com</a>。
+            </p>
+          </div>
           <CommissionForm />
         </section>
       </div>

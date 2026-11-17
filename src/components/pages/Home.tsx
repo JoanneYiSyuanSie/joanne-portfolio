@@ -75,7 +75,7 @@ export function Home() {
 
         <p className="font-sans text-lg md:text-xl font-bold text-ink-light leading-relaxed max-w-2xl border-l-4 border-accent pl-6">
           你好，我是 Joanne。<br />
-          具備 2 年以內行銷經驗，專注於 SEO、內容行銷策略與資訊架構。<br />
+          具備 2 年以內行銷經驗。<br />
           這是我為了深入實踐 Technical SEO、Core Web Vitals 與行銷自動化而親手搭建的成果展示站。
         </p>
       </section>
