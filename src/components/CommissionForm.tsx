@@ -101,7 +101,7 @@ export function CommissionForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-8 max-w-xl mx-auto pb-8">
       {status === "ERROR" && (
-        <div className="border-2 border-ink bg-paper p-4 font-mono text-xs sm:text-sm shadow-[4px_4px_0_0_#0A0A0A] border-l-8 border-l-ink space-y-1">
+        <div className="border border-black/15 bg-white p-4 font-mono text-xs sm:text-sm space-y-1">
           <div className="text-ink font-bold flex items-center gap-2">
             <span className="bg-ink text-white px-1.5 py-0.5 text-[10px]">NOTICE</span>
             <span>功能示範</span>
@@ -113,8 +113,8 @@ export function CommissionForm() {
       )}
 
       {/* 1. 成年確認 */}
-      <div className="space-y-3 p-4 border-l-4 border-ink bg-white">
-        <label className="block font-sans font-black text-lg text-ink">
+      <div className="space-y-3 p-4 border border-black/15 bg-white">
+        <label className="block font-sans font-bold text-lg text-ink">
           您成年了嗎？ <span className="text-accent font-bold">*</span>
         </label>
         <div className="flex gap-6">
@@ -144,7 +144,7 @@ export function CommissionForm() {
           </label>
         </div>
         {data.isAdult === "否" && (
-          <div className="mt-3 p-3 border-2 border-ink bg-paper text-ink font-sans text-xs sm:text-sm font-bold flex items-start gap-2.5 animate-in fade-in slide-in-from-top-2">
+          <div className="mt-3 p-3 border border-black/15 bg-white text-ink font-sans text-xs sm:text-sm font-bold flex items-start gap-2.5 animate-in fade-in slide-in-from-top-2">
             <span className="font-mono text-[10px] bg-ink text-white px-1.5 py-0.5 shrink-0 font-bold">NOTICE</span>
             <span className="leading-relaxed">無論內容尺度，僅接受 18 歲以上成年人進行委託</span>
           </div>
@@ -153,21 +153,21 @@ export function CommissionForm() {
 
       {/* 2. 稱呼 */}
       <div className="space-y-2">
-        <label className="block font-sans font-black text-lg text-ink">
+        <label className="block font-sans font-bold text-lg text-ink">
           您的稱呼
         </label>
         <input
           type="text"
           value={data.nickname}
           onChange={(e) => handleChange("nickname", e.target.value)}
-          className="w-full p-3 border-2 border-ink bg-white focus:outline-none focus:border-accent focus:shadow-[4px_4px_0_0_var(--theme-accent)] transition-all font-sans"
+          className="w-full p-3 border border-black/25 bg-white focus:outline-none focus:border-accent transition-colors font-sans"
           placeholder="簡答文字"
         />
       </div>
 
       {/* 3. 聯絡方式 */}
       <div className="space-y-2">
-        <label className="block font-sans font-black text-lg text-ink">
+        <label className="block font-sans font-bold text-lg text-ink">
           您的 Email <span className="text-[#D9453B]">*</span>
         </label>
         <p className="text-sm font-bold text-ink-light font-sans mb-2">您偏好的聯絡信箱</p>
@@ -176,14 +176,14 @@ export function CommissionForm() {
           required
           value={data.contact}
           onChange={(e) => handleChange("contact", e.target.value)}
-          className="w-full p-3 border-2 border-ink bg-white focus:outline-none focus:border-accent focus:shadow-[4px_4px_0_0_var(--theme-accent)] transition-all font-sans"
+          className="w-full p-3 border border-black/25 bg-white focus:outline-none focus:border-accent transition-colors font-sans"
           placeholder="例如：yourname@example.com"
         />
       </div>
 
       {/* 委託經歷 */}
       <div className="space-y-3">
-        <label className="block font-sans font-black text-lg text-ink">
+        <label className="block font-sans font-bold text-lg text-ink">
           曾與 Joanne 合作過嗎？ <span className="text-[#D9453B]">*</span>
         </label>
         <div className="flex flex-wrap gap-6 mt-2">
@@ -206,21 +206,21 @@ export function CommissionForm() {
 
       {/* 4. 優惠碼 */}
       <div className="space-y-2">
-        <label className="block font-sans font-black text-lg text-ink">
+        <label className="block font-sans font-bold text-lg text-ink">
           優惠碼
         </label>
         <input
           type="text"
           value={data.promoCode}
           onChange={(e) => handleChange("promoCode", e.target.value)}
-          className="w-full p-3 border-2 border-ink bg-white focus:outline-none focus:border-accent focus:shadow-[4px_4px_0_0_var(--theme-accent)] transition-all font-sans"
+          className="w-full p-3 border border-black/25 bg-white focus:outline-none focus:border-accent transition-colors font-sans"
           placeholder="符合使用條件方可折抵"
         />
       </div>
 
       {/* 5. 委託形式 */}
-      <div className="space-y-3 p-4 border-2 border-ink bg-paper shadow-[4px_4px_0_0_#0A0A0A]">
-        <label className="block font-sans font-black text-lg text-ink">
+      <div className="space-y-3 p-4 border border-black/15 bg-white">
+        <label className="block font-sans font-bold text-lg text-ink">
           委託形式 <span className="text-[#D9453B]">*</span>
         </label>
         <div className="space-y-4 mt-4">
@@ -288,7 +288,7 @@ export function CommissionForm() {
 
                 {/* Hover Tooltip */}
                 {type.description && !isDisabled && (
-                  <div className="absolute left-8 top-full mt-1 w-72 p-3 bg-white text-ink border-2 border-ink shadow-[4px_4px_0_0_#0A0A0A] text-sm font-sans font-bold z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none whitespace-pre-wrap">
+                  <div className="absolute left-8 top-full mt-1 w-72 p-3 bg-white text-ink border border-black/15 shadow-lg text-sm font-sans font-bold z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none whitespace-pre-wrap">
                     <div className="font-mono text-xs text-accent mb-1">[ INFO ]</div>
                     {type.description}
                   </div>
@@ -303,11 +303,11 @@ export function CommissionForm() {
 
       {/* 驚喜包(有開放) 或 客製化(有開放) */}
       {((data.commissionType === "驚喜包" && isSurprisePackOpen) || (data.commissionType === "客製化" && isCustomCommissionOpen)) && (
-        <div className="space-y-8 p-6 border-l-4 border-accent bg-white animate-in fade-in slide-in-from-top-4">
+        <div className="space-y-8 p-6 border border-black/15 bg-white animate-in fade-in slide-in-from-top-4">
 
           {/* 驚喜包專屬：活動須知橫幅 */}
           {data.commissionType === "驚喜包" && config.commission.surprisePackReferenceUrl && (
-            <div className="p-3 bg-paper border-2 border-ink flex items-center justify-between text-xs sm:text-sm font-bold">
+            <div className="p-3 bg-white border border-black/15 flex items-center justify-between text-xs sm:text-sm font-bold">
               <span className="text-ink">✦ 填單前請先確認本期驚喜包規則與主題：</span>
               <a
                 href={`${base}${config.commission.surprisePackReferenceUrl}`}
@@ -321,7 +321,7 @@ export function CommissionForm() {
           )}
 
           <div className="space-y-2">
-            <label className="block font-sans font-black text-lg text-ink">
+            <label className="block font-sans font-bold text-lg text-ink">
               設定資料連結 <span className="text-[#D9453B]">*</span>
             </label>
             <input
@@ -329,13 +329,13 @@ export function CommissionForm() {
               required
               value={data.referenceLink}
               onChange={(e) => handleChange("referenceLink", e.target.value)}
-              className="w-full p-3 border-2 border-ink bg-white focus:outline-none focus:border-accent focus:shadow-[4px_4px_0_0_var(--theme-accent)] transition-all font-sans"
+              className="w-full p-3 border border-black/25 bg-white focus:outline-none focus:border-accent transition-colors font-sans"
               placeholder="https://..."
             />
           </div>
 
           <div className="space-y-3">
-            <label className="block font-sans font-black text-lg text-ink">
+            <label className="block font-sans font-bold text-lg text-ink">
               可接受Paro / AU <span className="text-[#D9453B]">*</span>
             </label>
             <p className="text-sm font-bold text-ink-light font-sans mb-2">可能參考既有paro設定或自由發揮，也可能最後還是寫原設</p>
@@ -372,7 +372,7 @@ export function CommissionForm() {
             <>
               {/* 偏好模式 */}
               <div className="space-y-3">
-                <label className="block font-sans font-black text-lg text-ink">
+                <label className="block font-sans font-bold text-lg text-ink">
                   偏好模式 <span className="text-[#D9453B]">*</span>
                 </label>
                 <div className="flex flex-col gap-3 mt-2">
@@ -398,7 +398,7 @@ export function CommissionForm() {
 
               {/* 希望篇幅 */}
               <div className="space-y-3">
-                <label className="block font-sans font-black text-lg text-ink">
+                <label className="block font-sans font-bold text-lg text-ink">
                   希望篇幅 <span className="text-[#D9453B]">*</span>
                 </label>
                 <div className="flex flex-col gap-3 mt-2">
@@ -423,7 +423,7 @@ export function CommissionForm() {
 
           {/* 回覆頻率 */}
           <div className="space-y-3">
-            <label className="block font-sans font-black text-lg text-ink">
+            <label className="block font-sans font-bold text-lg text-ink">
               您回覆訊息的頻率 <span className="text-[#D9453B]">*</span>
             </label>
             <div className="flex flex-col gap-3 mt-2">
@@ -445,7 +445,7 @@ export function CommissionForm() {
           </div>
 
           <div className="space-y-2">
-            <label className="block font-sans font-black text-lg text-ink">
+            <label className="block font-sans font-bold text-lg text-ink">
               許願區
             </label>
             <p className="text-sm font-bold text-ink-light font-sans mb-2">不保證實現</p>
@@ -453,20 +453,20 @@ export function CommissionForm() {
               rows={3}
               value={data.wishlist}
               onChange={(e) => handleChange("wishlist", e.target.value)}
-              className="w-full p-3 border-2 border-ink bg-white focus:outline-none focus:border-accent focus:shadow-[4px_4px_0_0_var(--theme-accent)] transition-all font-sans resize-y"
+              className="w-full p-3 border border-black/25 bg-white focus:outline-none focus:border-accent transition-colors font-sans resize-y"
               placeholder="簡答文字"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="block font-sans font-black text-lg text-ink">
+            <label className="block font-sans font-bold text-lg text-ink">
               任何想說的話
             </label>
             <textarea
               rows={4}
               value={data.additionalNotes}
               onChange={(e) => handleChange("additionalNotes", e.target.value)}
-              className="w-full p-3 border-2 border-ink bg-white focus:outline-none focus:border-accent focus:shadow-[4px_4px_0_0_var(--theme-accent)] transition-all font-sans resize-y"
+              className="w-full p-3 border border-black/25 bg-white focus:outline-none focus:border-accent transition-colors font-sans resize-y"
               placeholder="詳答文字"
             />
           </div>
@@ -476,9 +476,9 @@ export function CommissionForm() {
 
       {/* 詢問回報 */}
       {data.commissionType === "詢問" && (
-        <div className="space-y-8 p-6 border-l-4 border-ink-light bg-white animate-in fade-in slide-in-from-top-4">
+        <div className="space-y-8 p-6 border border-black/15 bg-white animate-in fade-in slide-in-from-top-4">
           <div className="space-y-2">
-            <label className="block font-sans font-black text-lg text-ink">
+            <label className="block font-sans font-bold text-lg text-ink">
               請說
             </label>
             <textarea
@@ -486,7 +486,7 @@ export function CommissionForm() {
               required
               value={data.otherQuestions}
               onChange={(e) => handleChange("otherQuestions", e.target.value)}
-              className="w-full p-3 border-2 border-ink bg-white focus:outline-none focus:border-accent focus:shadow-[4px_4px_0_0_var(--theme-accent)] transition-all font-sans resize-y"
+              className="w-full p-3 border border-black/25 bg-white focus:outline-none focus:border-accent transition-colors font-sans resize-y"
               placeholder="詳答文字"
             />
           </div>
@@ -502,15 +502,15 @@ export function CommissionForm() {
             (data.commissionType === "驚喜包" && !isSurprisePackOpen) ||
             (data.isAdult === "否" && (data.commissionType === "驚喜包" || data.commissionType === "客製化"))
           }
-          className="brutalist-button px-8 py-4 text-xl tracking-widest disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:-translate-y-0 disabled:hover:shadow-[4px_4px_0px_0px_#0A0A0A] flex items-center gap-3"
+          className="brutalist-button px-8 py-3 text-base disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3"
         >
           {status === "SUBMITTING" ? (
             <>
-              <div className="w-5 h-5 border-4 border-ink border-t-accent rounded-full animate-spin"></div>
-              TRANSMITTING...
+              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+              送出中…
             </>
           ) : (
-            "EXECUTE_SUBMIT"
+            "送出"
           )}
         </button>
       </div>

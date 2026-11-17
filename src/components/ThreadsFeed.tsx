@@ -9,16 +9,13 @@ const SAMPLE_POSTS = [
 export function ThreadsFeed() {
   return (
     <div className="pb-8">
-      <div className="space-y-8 max-w-3xl">
+      <div className="max-w-3xl">
         {SAMPLE_POSTS.map((post) => (
-          <div key={post.id} className="border-l-4 border-ink pl-6 py-2 relative">
-            <span className="absolute -left-[14px] top-4 w-6 h-6 bg-paper border-4 border-ink flex items-center justify-center">
-              <span className="w-1.5 h-1.5 bg-ink"></span>
-            </span>
-            <div className="font-mono text-xs font-bold text-ink/50 mb-2">
+          <div key={post.id} className="border-b border-black/15 py-5">
+            <div className="font-mono text-xs text-ink-light mb-2">
               {post.label}
             </div>
-            <p className="font-sans font-bold text-ink leading-relaxed text-lg">
+            <p className="font-sans text-ink leading-relaxed text-lg">
               範例 Threads 串文會顯示在這裡
             </p>
           </div>

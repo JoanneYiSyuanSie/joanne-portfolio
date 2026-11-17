@@ -1,42 +1,25 @@
-
 import { useState, useEffect } from "react";
 import { Redacted } from "../../components/Redacted";
-import { ScrambleText } from "../../components/ScrambleText";
 import { getRecentPosts, getPostUrl, type PostMeta } from "../../lib/content";
 
-import { cn } from "../../lib/utils";
-
-const STATUS_STYLE: Record<string, { label: string; className: string }> = {
-  PUBLISHED: { label: "STATUS: PUBLISHED", className: "bg-ink text-white group-hover:bg-white group-hover:text-ink" },
-  UPDATED: { label: "STATUS: UPDATED", className: "border-2 border-ink text-ink group-hover:border-white group-hover:text-white" },
-  DRAFT: { label: "STATUS: DRAFT", className: "border-2 border-ink/50 text-ink/50 group-hover:border-white/50 group-hover:text-white/50" },
-};
-
-function PostCard({ post, variant }: { post: PostMeta; variant: "accent" | "ink" }) {
-  const status = STATUS_STYLE[post.status] || STATUS_STYLE.PUBLISHED;
+function PostCard({ post, index }: { post: PostMeta; index: number }) {
   return (
-    <article className={cn(
-      "brutalist-block p-6 group transition-colors",
-      variant === "accent" ? "hover:bg-accent hover:border-accent" : "hover:bg-ink"
-    )}>
-      <a href={getPostUrl(post)} className="block space-y-4">
-        <div className="flex flex-wrap justify-between items-start gap-x-4 gap-y-2">
-          <span className={cn("font-mono text-xs font-bold px-2 py-1 break-words max-w-[70%]", status.className)}>
-            {status.label}
-          </span>
-          <span className="font-mono text-xs font-bold text-ink-light group-hover:text-white/80 shrink-0">
-            {post.date.slice(0, 10).replace(/-/g, '.')}
-          </span>
+    <article className="border-t border-black/15">
+      <a href={getPostUrl(post)} className="group flex items-baseline gap-4 py-5">
+        <span className="font-mono text-xs text-ink-light shrink-0">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <div className="flex-1 min-w-0">
+          <h3 className="font-sans text-xl font-bold leading-snug group-hover:text-accent transition-colors">
+            {post.title}
+          </h3>
+          <p className="font-sans text-sm text-ink-light leading-relaxed mt-1 line-clamp-2">
+            {post.excerpt}
+          </p>
         </div>
-        <h3 className={cn(
-          "font-serif text-2xl font-bold transition-colors",
-          variant === "accent" ? "group-hover:text-white" : "group-hover:text-accent"
-        )}>
-          {post.title}
-        </h3>
-        <p className="font-sans text-sm font-bold text-ink-light group-hover:text-white/90 line-clamp-3">
-          {post.excerpt}
-        </p>
+        <span className="font-mono text-xs text-ink-light shrink-0 hidden sm:block">
+          {post.date.slice(0, 10).replace(/-/g, '.')}
+        </span>
       </a>
     </article>
   );
@@ -46,7 +29,6 @@ export function Home() {
   // Use defaults for homepage
 
   const recentPosts = getRecentPosts(2);
-  const variants: ("accent" | "ink")[] = ["accent", "ink"];
 
   const handleDotClick = () => {
     try {
@@ -58,50 +40,44 @@ export function Home() {
 
   return (
     <div className="px-8 md:px-12 xl:px-16 pt-8 md:pt-12 xl:pt-16 space-y-16 relative min-h-full">
-      <section className="space-y-8">
-        <button 
+      <section className="space-y-6">
+        <button
           onClick={handleDotClick}
-          className="inline-flex items-center gap-2 border-2 border-ink bg-ink text-white font-mono text-xs px-3 py-1 font-bold shadow-[2px_2px_0_0_var(--theme-accent)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_var(--theme-accent)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all cursor-pointer"
+          className="inline-flex items-center gap-2 bg-ink text-white font-mono text-xs px-3 py-2 font-bold hover:bg-accent transition-colors cursor-pointer"
           aria-label="訂閱通訊"
         >
           <span>SUBSCRIBE_</span>
           <span className="w-2 h-2 bg-accent rounded-full animate-pulse-dot [.dot-dismissed_&]:!hidden" />
         </button>
 
-        <h1 className="font-serif text-3xl md:text-5xl font-black leading-snug">
-          歡迎來到<br className="hidden md:block" />
-          <ScrambleText text="JOANNE'S JOURNAL" />
+        <h1 className="font-sans text-5xl md:text-7xl font-extrabold tracking-tight leading-[0.95]">
+          JOANNE'S<br />JOURNAL
         </h1>
 
-        <p className="font-sans text-lg md:text-xl font-bold text-ink-light leading-relaxed max-w-2xl border-l-4 border-accent pl-6">
+        <p className="font-sans text-base md:text-lg text-ink leading-relaxed max-w-2xl">
           你好，我是 Joanne。<br />
           具備 2 年以內行銷經驗。<br />
           這是我為了深入實踐 Technical SEO、Core Web Vitals 與行銷自動化而親手搭建的成果展示站。
         </p>
       </section>
 
-      <section className="pt-12 border-t-4 border-ink relative">
-        {/* Decorative corner box */}
-        <div className="absolute -top-1.5 -left-1.5 w-3 h-3 bg-paper border-2 border-ink"></div>
-        <div className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-paper border-2 border-ink"></div>
-
-        <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-          <h2 className="font-mono text-xl font-black uppercase tracking-widest text-ink flex items-center gap-2">
-            <span className="w-4 h-4 bg-accent inline-block shadow-[2px_2px_0_0_#0A0A0A]"></span>
-            RECENT_FILES
+      <section className="pt-10 border-t border-black/15">
+        <div className="flex flex-wrap items-end justify-between gap-4 mb-2">
+          <h2 className="font-sans text-xl font-bold">
+            最近文章
           </h2>
-          <a href={`${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}/archive`} className="brutalist-button px-4 py-2 text-sm shrink-0">
-            VIEW_ALL <span className="font-mono ml-2">→</span>
+          <a href={`${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}/archive`} className="font-sans text-sm font-bold text-ink hover:text-accent transition-colors shrink-0">
+            全部文章 →
           </a>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="border-b border-black/15">
           {recentPosts.map((post, i) => (
-            <PostCard key={post.slug} post={post} variant={variants[i % 2]} />
+            <PostCard key={post.slug} post={post} index={i} />
           ))}
         </div>
 
-        {/* Bottom spacer: fixed gap below the cards — the parent's bottom padding is lost when the scroll area overflows */}
+        {/* Bottom spacer: fixed gap below the list — the parent's bottom padding is lost when the scroll area overflows */}
         <div aria-hidden="true" className="h-8 md:h-12 xl:h-16" />
       </section>
 

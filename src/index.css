@@ -3,30 +3,31 @@
 
 @theme {
   --font-sans: "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Noto Serif TC", ui-serif, Georgia, serif;
+  /* Swiss index: one grotesk carries everything; serif token kept as an
+     alias so any leftover font-serif usage renders as grotesk. */
+  --font-serif: "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-paper: #F5F4EE;
-  --color-ink: #0A0A0A;
-  --color-ink-light: #4A4A4A;
-  --color-accent: var(--theme-accent, #A06540);
+  --color-paper: #F4F4F4;
+  --color-ink: #0E0E0E;
+  --color-ink-light: #6B6B6B;
+  --color-accent: var(--theme-accent, #E2001A);
 }
 
 @layer base {
   body {
-    @apply bg-[#F0EBE3] text-ink selection:bg-accent selection:text-white;
-    background-image: radial-gradient(#E0D8C8 1px, transparent 1px);
-    background-size: 24px 24px;
+    @apply bg-paper text-ink selection:bg-accent selection:text-white;
   }
 }
 
 @layer components {
+  /* Legacy names from the brutalist fork; redefined flat for the Swiss skin. */
   .brutalist-block {
-    @apply bg-paper border-4 border-ink shadow-[12px_12px_0_0_#0A0A0A];
+    @apply bg-white border border-black/10;
   }
 
   .brutalist-button {
-    @apply bg-white border-4 border-ink px-4 py-2 font-mono font-bold text-ink shadow-[4px_4px_0_0_#0A0A0A] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:translate-x-[4px] active:translate-y-[4px];
+    @apply bg-ink text-white px-4 py-2 font-sans font-bold transition-colors hover:bg-accent cursor-pointer;
   }
 
   @keyframes marquee {
@@ -87,11 +88,11 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-paper border-l-4 border-ink;
+    @apply bg-paper border-l border-black/10;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-ink border-2 border-paper;
+    @apply bg-ink/30 border-2 border-paper;
   }
 
   .prose-hr-dots {
@@ -145,7 +146,7 @@
 }
 
 .preview-container h1 {
-  @apply text-4xl font-black mb-8 border-l-8 border-accent pl-6;
+  @apply text-4xl font-black mb-8 border-l-2 border-accent pl-6;
 }
 
 .empty-line {

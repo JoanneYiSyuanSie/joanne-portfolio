@@ -152,14 +152,14 @@ export function EasterEgg({ config }: EasterEggProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop with high-tech blur */}
       <div
-        className="absolute inset-0 bg-black/90 backdrop-blur-md cursor-pointer"
+        className="absolute inset-0 bg-black/60 cursor-pointer"
         onClick={() => setIsOpen(false)}
       />
 
       {/* System Style Modal */}
-      <div className="relative z-10 max-w-lg w-full brutalist-block overflow-hidden bg-paper border-4 border-ink shadow-[16px_16px_0_0_#000]">
+      <div className="relative z-10 max-w-lg w-full bg-white border border-black/15 shadow-lg overflow-hidden">
         {/* System Header */}
-        <div className="bg-ink text-white p-3 flex justify-between items-center border-b-4 border-ink">
+        <div className="bg-ink text-white p-3 flex justify-between items-center border-b border-black/15">
           <div className="font-mono text-xs tracking-tighter font-bold flex items-center gap-2">
             <span className="w-2 h-2 bg-accent animate-pulse"></span>
             JOANNE_DEEP_ARCHIVE // EXTRACTING_SIGNAL
@@ -181,13 +181,13 @@ export function EasterEgg({ config }: EasterEggProps) {
             STATUS: RESTRICTED_ACCESS_GRANTED
           </div>
 
-          <div className="mb-6 font-serif text-2xl md:text-3xl font-black text-ink border-l-8 border-accent pl-6 py-2 uppercase tracking-tight">
+          <div className="mb-6 font-sans text-2xl md:text-3xl font-extrabold text-ink border-l-2 border-accent pl-6 py-2 uppercase tracking-tight">
             深度紀錄：
             <br />
             提取成功
           </div>
 
-          <div className="prose prose-p:font-sans prose-headings:font-serif prose-a:text-accent prose-a:font-bold prose-strong:font-bold prose-hr:border-ink/10 text-ink/90 text-lg leading-relaxed bg-ink/[0.03] p-6 border-2 border-dashed border-ink/20">
+          <div className="prose prose-p:font-sans prose-headings:font-sans prose-a:text-accent prose-a:font-bold prose-strong:font-bold prose-hr:border-ink/10 text-ink/90 text-lg leading-relaxed bg-black/[0.03] p-6 border border-dashed border-black/20">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {decryptedMessage.replace(/\n/g, '  \n')}
             </ReactMarkdown>
@@ -201,7 +201,7 @@ export function EasterEgg({ config }: EasterEggProps) {
             {activeCouponCode && (
               <button 
                 onClick={copyToClipboard}
-                className="w-full py-3 border-2 border-accent text-accent font-bold hover:bg-accent hover:text-white transition-all flex items-center justify-center gap-2 group cursor-pointer"
+                className="w-full py-3 border border-accent text-accent font-bold hover:bg-accent hover:text-white transition-colors flex items-center justify-center gap-2 group cursor-pointer"
               >
                 <span className="font-mono text-xs opacity-50 group-hover:opacity-100">[{activeCouponCode}]</span>
                 {copyStatus}
@@ -218,7 +218,7 @@ export function EasterEgg({ config }: EasterEggProps) {
         </div>
 
         {/* Bottom Status Bar */}
-        <div className="bg-[#EAE8E4] p-2 border-t-4 border-ink font-mono text-[9px] text-ink/50 flex justify-between">
+        <div className="bg-paper p-2 border-t border-black/15 font-mono text-[9px] text-ink/50 flex justify-between">
           <span>SECURE_PROTOCOL: ENABLED</span>
           <span>ENCRYPTION: SERVER_SIDE_D1_RESTRICTED</span>
         </div>

@@ -50,21 +50,18 @@ export function Formatter() {
   };
 
   return (
-    <div className="flex flex-col bg-[#FFFDF9]">
-      <div className="sticky top-0 bg-ink text-white z-20 flex items-center justify-between p-4 px-6 md:px-12 border-b-4 border-ink">
-        <div className="font-mono text-sm font-bold flex items-center gap-2">
-          <span className="bg-white text-ink w-6 h-6 flex items-center justify-center rounded-sm">&gt;</span>
-          TEXT_FORMATTER_UTILITY
-        </div>
-        <div className="font-mono text-xs font-bold opacity-80">SYS: OFFLINE_TOOL</div>
+    <div className="flex flex-col bg-paper">
+      <div className="sticky top-0 bg-ink text-white z-20 flex items-center justify-between p-4 px-6 md:px-12 border-b border-black/20">
+        <div className="font-sans text-sm font-bold">排版小工具</div>
+        <div className="font-mono text-xs opacity-80">離線工具</div>
       </div>
 
       <div className="flex-1 w-full p-6 md:p-12 pb-32 max-w-6xl mx-auto">
         <header className="mb-12">
-          <h1 className="font-serif text-3xl md:text-4xl font-black text-ink leading-snug mb-4">
+          <h1 className="font-sans text-3xl md:text-4xl font-extrabold tracking-tight text-ink leading-snug mb-4">
             自動排版小工具
           </h1>
-          <p className="font-mono text-sm text-ink/70 max-w-2xl">
+          <p className="font-sans text-sm text-ink-light max-w-2xl leading-relaxed">
             將原稿貼在左側，點擊轉換後，右側會自動調整換行與縮排。
             <br />
             您可以勾選是否啟用小說專用的「網頁縮排（&amp;emsp;&amp;emsp;）」，不啟用時會自動清除現有的 &amp;emsp; 縮排。
@@ -75,11 +72,11 @@ export function Formatter() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full min-h-[60vh]">
           {/* Input Area */}
           <div className="flex flex-col gap-2">
-            <label className="font-mono text-xs font-bold text-ink flex justify-between border-b-2 border-ink pb-2">
-              <span>[ INPUT_RAW_TEXT ]</span>
+            <label className="font-mono text-xs text-ink-light flex justify-between border-b border-black/15 pb-2">
+              <span>原文</span>
             </label>
             <textarea
-              className="w-full flex-1 p-4 bg-white border-4 border-ink font-serif text-base resize-none focus:outline-none focus:ring-4 focus:ring-accent/30 shadow-[4px_4px_0_0_#000] custom-scrollbar"
+              className="w-full flex-1 p-4 bg-white border border-black/25 font-sans text-base resize-none focus:outline-none focus:border-accent custom-scrollbar"
               placeholder="在此貼上原稿..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -90,29 +87,29 @@ export function Formatter() {
                 id="useIndent"
                 checked={useIndent}
                 onChange={(e) => setUseIndent(e.target.checked)}
-                className="w-5 h-5 border-2 border-ink accent-ink cursor-pointer"
+                className="w-5 h-5 accent-ink cursor-pointer"
               />
-              <label htmlFor="useIndent" className="font-mono text-sm font-bold text-ink cursor-pointer select-none">
+              <label htmlFor="useIndent" className="font-sans text-sm text-ink cursor-pointer select-none">
                 啟用段落首行縮排（&amp;emsp;&amp;emsp; 小說專用）
               </label>
             </div>
             <button
               onClick={formatText}
-              className="w-full py-4 bg-ink text-white font-mono font-bold hover:bg-accent active:translate-y-[2px] transition-all mt-2 border-2 border-ink shadow-[4px_4px_0_0_#000] active:shadow-none cursor-pointer"
+              className="w-full py-3 bg-ink text-white font-sans font-bold hover:bg-accent transition-colors mt-2 cursor-pointer"
             >
-              &gt; EXECUTE_FORMATTING
+              開始排版
             </button>
           </div>
 
           {/* Output Area */}
           <div className="flex flex-col gap-2">
-            <label className="font-mono text-xs font-bold text-ink flex justify-between border-b-2 border-ink pb-2">
-              <span>[ OUTPUT_MARKDOWN ]</span>
-              {copied && <span className="text-accent animate-pulse">COPIED_TO_CLIPBOARD!</span>}
+            <label className="font-mono text-xs text-ink-light flex justify-between border-b border-black/15 pb-2">
+              <span>排版結果</span>
+              {copied && <span className="text-accent animate-pulse">已複製！</span>}
             </label>
             <textarea
               readOnly
-              className="w-full flex-1 p-4 bg-ink/5 border-4 border-ink font-mono text-sm resize-none focus:outline-none custom-scrollbar"
+              className="w-full flex-1 p-4 bg-black/5 border border-black/25 font-mono text-sm resize-none focus:outline-none custom-scrollbar"
               placeholder="排版結果會顯示在這裡..."
               value={output}
             />
@@ -120,13 +117,13 @@ export function Formatter() {
               onClick={copyToClipboard}
               disabled={!output}
               className={cn(
-                "w-full py-4 font-mono font-bold transition-all mt-4 border-2 border-ink",
-                output 
-                  ? "bg-accent text-white hover:bg-ink shadow-[4px_4px_0_0_#000] active:translate-y-[2px] active:shadow-none cursor-pointer" 
-                  : "bg-ink/10 text-ink/30 cursor-not-allowed"
+                "w-full py-3 font-sans font-bold transition-colors mt-4",
+                output
+                  ? "bg-accent text-white hover:bg-ink cursor-pointer"
+                  : "bg-black/10 text-ink/30 cursor-not-allowed"
               )}
             >
-              {copied ? "COPIED !" : "&gt; COPY_TO_CLIPBOARD"}
+              {copied ? "已複製" : "複製結果"}
             </button>
           </div>
         </div>

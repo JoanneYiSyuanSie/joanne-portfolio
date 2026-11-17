@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ScrambleText } from "../../components/ScrambleText";
 import { CategoryDropdown } from "../../components/CategoryDropdown";
 import { getPostUrl, type Post, type CategoryInfo } from "../../lib/content";
 
@@ -33,13 +32,12 @@ export function Archive({
 
   return (
     <div className="p-0 flex flex-col h-full min-h-full">
-      <header className="px-8 py-10 bg-black text-white border-b-4 border-black relative shrink-0 z-50" style={{ viewTransitionName: 'archive-header' }}>
-        <h1 className="font-mono text-3xl font-black mb-2 tracking-widest">
-          ARTICLES <span className="text-accent">___</span>
+      <header className="px-8 py-10 bg-ink text-white relative shrink-0 z-50" style={{ viewTransitionName: 'archive-header' }}>
+        <h1 className="font-sans text-4xl font-extrabold tracking-tight mb-2">
+          文章
         </h1>
-        <p className="font-sans font-bold opacity-80 max-w-xl mb-6">
-          RECORD_COUNT = {posts.length}; // ACCESS: GRANTED
-          <br/>收錄所有 SEO、內容策略與行銷自動化實務文章。
+        <p className="font-sans max-w-xl mb-6 text-white/70">
+          共 {posts.length} 篇。收錄所有 SEO、內容策略與行銷自動化實務文章。
         </p>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -53,21 +51,20 @@ export function Archive({
           <div className="flex justify-end items-center min-h-[36px]">
             {isSearchOpen || searchQuery ? (
               <div className="flex items-center w-full sm:w-[240px] animate-in fade-in slide-in-from-right-4 duration-200">
-                <span className="opacity-50 mr-2 font-mono font-bold text-accent">&gt;_</span>
-                <input 
+                <input
                   autoFocus
-                  type="text" 
+                  type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onBlur={() => { if (!searchQuery) setIsSearchOpen(false) }}
-                  placeholder="SEARCH..."
-                  className="w-full bg-transparent border-b-2 border-white/30 text-white font-mono py-1 text-xs focus:border-white focus:outline-none transition-colors placeholder-white/30"
+                  placeholder="搜尋文章…"
+                  className="w-full bg-transparent border-b border-white/30 text-white font-sans py-1 text-sm focus:border-white focus:outline-none transition-colors placeholder-white/40"
                 />
               </div>
             ) : (
               <button 
                 onClick={() => setIsSearchOpen(true)} 
-                className="opacity-40 hover:opacity-100 transition-opacity p-2 flex items-center justify-center border-2 border-transparent hover:border-white/30"
+                className="opacity-40 hover:opacity-100 transition-opacity p-2 flex items-center justify-center border border-transparent hover:border-white/30"
                 title="Search Database"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -81,37 +78,35 @@ export function Archive({
 
       <div className="flex flex-col pb-8">
         {filteredPosts.length === 0 ? (
-          <div className="p-8 font-mono text-ink font-bold text-lg text-center opacity-50">
-            NO_RECORDS_FOUND
+          <div className="p-8 font-sans text-ink text-lg text-center opacity-50">
+            沒有符合的文章。
           </div>
         ) : (
           filteredPosts.map((post, index) => (
-            <a 
-              key={post.slug} 
+            <a
+              key={post.slug}
               href={getPostUrl(post)}
-              className="group block border-b-4 border-ink relative overflow-hidden"
+              className="group block border-b border-black/15"
             >
-              <div className="absolute inset-0 bg-accent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out z-0"></div>
-              
-              <div className="relative z-10 flex flex-col md:flex-row md:items-center py-6 px-8 gap-4">
-                <div className="font-mono text-xs font-black w-12 shrink-0 group-hover:text-white transition-colors">
+              <div className="flex flex-col md:flex-row md:items-baseline py-6 px-8 gap-2 md:gap-4">
+                <div className="font-mono text-xs w-12 shrink-0 text-ink-light">
                   #{(index + 1).toString().padStart(3, '0')}
                 </div>
-                
+
                 <div className="flex-1 flex flex-col">
-                  <h3 className="font-serif text-2xl font-black group-hover:text-white transition-colors mb-2 md:mb-0">
-                    <ScrambleText text={post.title} />
+                  <h3 className="font-sans text-2xl font-bold group-hover:text-accent transition-colors mb-2 md:mb-0">
+                    {post.title}
                   </h3>
                 </div>
-                
-                <div className="flex items-center gap-3 font-mono text-xs font-bold tracking-widest shrink-0 mt-2 md:mt-0">
-                  <span className="px-2 py-1 bg-ink text-white group-hover:bg-white group-hover:text-ink transition-colors">
+
+                <div className="flex items-center gap-3 font-mono text-xs shrink-0 mt-2 md:mt-0">
+                  <span className="text-accent font-bold">
                     {post.category}
                   </span>
-                  <span className="w-24 text-right group-hover:text-white transition-colors hidden sm:block">
+                  <span className="w-24 text-right text-ink-light hidden sm:block">
                     {post.status}
                   </span>
-                  <span className="w-24 text-right group-hover:text-white transition-colors">
+                  <span className="w-24 text-right text-ink-light">
                     {post.date.slice(0, 10).replace(/-/g, '.')}
                   </span>
                 </div>
@@ -121,7 +116,7 @@ export function Archive({
         )}
       </div>
       
-      <div className="p-8 text-center bg-gray-100 font-mono text-xs font-bold text-ink-light">
+      <div className="p-8 text-center font-mono text-xs text-ink-light">
         [ END OF INDEX ]
       </div>
     </div>

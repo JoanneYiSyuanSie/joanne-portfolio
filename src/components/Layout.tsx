@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { cn } from "../lib/utils";
 import { Marquee } from "./Marquee";
-import { trackEvent } from "../lib/analytics";
 import { NewsletterModal } from "./NewsletterModal";
 
 const NAV_ITEMS = [
@@ -108,36 +107,6 @@ export function Layout({ children, currentPath }: LayoutProps) {
     };
   }, [currentPath]);
 
-  // Theme Restoration Logic
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const savedColor = localStorage.getItem('theme_accent_color');
-        if (savedColor) {
-          document.documentElement.style.setProperty('--theme-accent', savedColor);
-        }
-      } catch (e) {
-        console.warn("localStorage read blocked:", e);
-      }
-    }
-  }, []);
-
-  const changeTheme = (color: string, colorName: string) => {
-    document.documentElement.style.setProperty('--theme-accent', color);
-    setSysMsg(`THEME_UPDATED: ${colorName}`);
-    trackEvent("change_theme", { color_name: colorName });
-    setTimeout(() => setSysMsg("DATA_PRIVACY_PROTOCOL"), 2500);
-
-    if (typeof window !== 'undefined') {
-      try {
-        localStorage.setItem('theme_accent_color', color);
-      } catch (e) {
-        console.warn("localStorage write blocked:", e);
-      }
-      window.dispatchEvent(new CustomEvent('themeChange', { detail: { colorName } }));
-    }
-  };
-
   const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
   const withBase = (path: string) => {
     if (path === '/') return base || '/';
@@ -149,13 +118,10 @@ export function Layout({ children, currentPath }: LayoutProps) {
       <div className="w-full max-w-7xl mx-auto brutalist-block flex flex-col md:flex-row min-h-[85vh] md:h-[85vh] overflow-hidden relative">
 
         {/* Sidebar / Index System */}
-        <aside className="md:w-72 flex-shrink-0 flex flex-col border-b-4 md:border-b-0 md:border-r-4 border-ink bg-[#FFFDF9] relative z-10">
+        <aside className="md:w-72 flex-shrink-0 flex flex-col border-b md:border-b-0 md:border-r border-black/15 bg-paper relative z-10">
 
-          <a href={base || "/"} className="block shrink-0 p-6 md:p-8 border-b-4 border-ink hover:bg-ink group overflow-hidden relative transition-colors duration-300">
-            {/* Background noise texture effect on hover */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-10 pointer-events-none transition-opacity bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjRjJGMEU5Ij48L3JlY3Q+CiA8cGF0aCBkPSJNMCAwdjhoOHYtOEgwem00IDRWMGgydjRIMHoiIGZpbGw9IiNFMEQ4QzgiIGZpbGwtb3BhY2l0eT0iLjMiPjwvcGF0aD4KPC9zdmc+')]"></div>
-
-            <div className="font-serif text-3xl font-black text-ink group-hover:text-white transition-colors duration-300 relative z-10">
+          <a href={base || "/"} className="block shrink-0 p-6 md:p-8 border-b border-black/15 hover:bg-ink group overflow-hidden relative transition-colors duration-300">
+            <div className="font-sans text-3xl font-extrabold tracking-tight text-ink group-hover:text-white transition-colors duration-300 relative z-10">
               JOANNE
               <br />
               <span className="text-4xl mt-1 block">ARCHIVE</span>
@@ -165,7 +131,7 @@ export function Layout({ children, currentPath }: LayoutProps) {
             </div>
           </a>
 
-          <nav className="flex-1 flex flex-row md:flex-col overflow-x-auto md:overflow-y-auto custom-scrollbar divide-x-4 md:divide-x-0 md:divide-y-4 divide-ink">
+          <nav className="flex-1 flex flex-row md:flex-col overflow-x-auto md:overflow-y-auto custom-scrollbar divide-x md:divide-x-0 md:divide-y divide-black/15">
             {NAV_ITEMS.map((item) => {
               const cleanCurrent = currentPath.startsWith(base) ? (currentPath.slice(base.length) || '/') : currentPath;
               const isActive = cleanCurrent === item.path || (item.path !== "/" && cleanCurrent.startsWith(item.path));
@@ -177,58 +143,30 @@ export function Layout({ children, currentPath }: LayoutProps) {
                   key={item.path}
                   href={withBase(targetPath)}
                   className={cn(
-                    "flex-1 md:flex-none shrink-0 flex items-center md:items-start md:flex-col pl-4 pr-2 py-4 md:p-6 group relative overflow-hidden transition-colors",
-                    isActive ? "bg-accent text-white" : "hover:bg-ink hover:text-white text-ink"
+                    "flex-1 md:flex-none shrink-0 flex items-center md:items-start md:flex-col pl-4 pr-2 py-4 md:p-6 group relative transition-colors",
+                    isActive ? "bg-ink text-white" : "hover:bg-black/5 text-ink"
                   )}
                 >
                   <div className="flex flex-col relative z-10 min-w-max">
-                    <span className="font-mono text-[10px] font-bold opacity-60 mb-1">
+                    <span className={cn("font-mono text-[10px] font-bold mb-1", isActive ? "text-accent" : "opacity-50")}>
                       INDEX_{item.id}
                     </span>
                     <div className="flex items-center gap-3">
-                      <span className="font-serif text-[22px] md:text-2xl font-bold tracking-widest group-hover:skew-x-[-10deg] transition-transform duration-300">
+                      <span className="font-sans text-[22px] md:text-2xl font-bold tracking-tight">
                         {item.label}
                       </span>
-                      <span className="font-mono text-xs uppercase tracking-widest hidden md:inline-block">
+                      <span className="font-mono text-xs uppercase tracking-widest hidden md:inline-block opacity-50">
                         — {item.subtitle}
                       </span>
                     </div>
                   </div>
-
-                  {/* Accent sweep on hover */}
-                  <div className={cn(
-                    "absolute inset-0 bg-ink origin-left scale-x-0 transition-transform duration-300 ease-out z-0",
-                    !isActive && "group-hover:scale-x-100"
-                  )}></div>
                 </a>
               );
             })}
           </nav>
 
-          <div className="hidden md:flex flex-col shrink-0 border-t-4 border-ink bg-[#EAE8E4]">
-            <div className="p-4 flex gap-3 border-b border-ink/20">
-              <button
-                onClick={() => changeTheme('#A06540', 'EARTH')}
-                className="w-4 h-4 rounded-full bg-[#A06540] shadow-[2px_2px_0_0_#000] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:translate-y-[2px] active:translate-x-[1px] active:shadow-none transition-all cursor-pointer border-2 border-ink"
-                title="SYS_COLOR: EARTH (大地暖色)"
-              />
-              <button
-                onClick={() => changeTheme('#18181B', 'OBSIDIAN')}
-                className="w-4 h-4 rounded-full bg-[#18181B] shadow-[2px_2px_0_0_#000] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:translate-y-[2px] active:translate-x-[1px] active:shadow-none transition-all cursor-pointer border-2 border-ink"
-                title="SYS_COLOR: OBSIDIAN (曜石黑)"
-              />
-              <button
-                onClick={() => changeTheme('#78716C', 'PAPER')}
-                className="w-4 h-4 rounded-full bg-[#78716C] shadow-[2px_2px_0_0_#000] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:translate-y-[2px] active:translate-x-[1px] active:shadow-none transition-all cursor-pointer border-2 border-ink"
-                title="SYS_COLOR: PAPER (極簡白紙灰)"
-              />
-              <button
-                onClick={() => changeTheme('#4A7C59', 'SAGE')}
-                className="w-4 h-4 rounded-full bg-[#4A7C59] shadow-[2px_2px_0_0_#000] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#000] active:translate-y-[2px] active:translate-x-[1px] active:shadow-none transition-all cursor-pointer border-2 border-ink"
-                title="SYS_COLOR: SAGE (鼠尾草灰綠)"
-              />
-            </div>
-            <div className="p-4 font-mono text-[10px] uppercase font-bold text-ink/80 leading-none h-10 flex items-center">
+          <div className="hidden md:flex flex-col shrink-0 border-t border-black/15">
+            <div className="p-4 font-mono text-[10px] uppercase font-bold text-ink/60 leading-none h-10 flex items-center">
               <a href={`${base}/privacy`} className="hover:text-ink hover:underline decoration-ink/30 underline-offset-4 transition-all cursor-help" title="SYS_PRIVACY_PROTOCOL">
                 SYS.MSG: {sysMsg}
               </a>
@@ -237,8 +175,8 @@ export function Layout({ children, currentPath }: LayoutProps) {
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 bg-[#FFFDF9] relative flex flex-col overflow-hidden">
-          <Marquee text="* CONTENT STRATEGY * TECHNICAL SEO NOTES * MARKETING AUTOMATION * JOANNE JOURNAL *" className="border-b-4 border-ink flex-shrink-0" />
+        <main className="flex-1 bg-paper relative flex flex-col overflow-hidden">
+          <Marquee text="* CONTENT STRATEGY * TECHNICAL SEO NOTES * MARKETING AUTOMATION * JOANNE JOURNAL *" className="border-b border-black/15 flex-shrink-0" />
 
           <div id="main-scroll-container" style={{ viewTransitionName: 'main-area' }} className="flex-1 relative flex flex-col overflow-y-auto custom-scrollbar">
             {children}

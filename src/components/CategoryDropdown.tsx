@@ -48,10 +48,10 @@ export function CategoryDropdown({
       <button
         onClick={handleToggle}
         className={cn(
-          "font-mono text-xs font-bold px-4 py-2 border-2 transition-all cursor-pointer flex items-center gap-2",
+          "font-mono text-xs px-4 py-2 border transition-colors cursor-pointer flex items-center gap-2",
           isOpen
             ? "bg-white text-ink border-white"
-            : "bg-transparent border-white/50 text-white hover:border-white"
+            : "bg-transparent border-white/40 text-white hover:border-white"
         )}
       >
         <svg className="w-4 h-4 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -65,16 +65,16 @@ export function CategoryDropdown({
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 z-50 bg-paper border-4 border-ink shadow-[8px_8px_0_0_#0A0A0A] p-4 min-w-[280px] sm:w-max max-w-[90vw] animate-modal-in">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <div className="absolute top-full left-0 mt-2 z-50 bg-white border border-black/15 shadow-lg p-2 min-w-[280px] sm:w-max max-w-[90vw] animate-modal-in">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
             {/* "全部" option */}
             <a
               href={`${base}/archive`}
               className={cn(
-                "font-mono text-xs font-bold px-3 py-2 border-2 transition-all block whitespace-nowrap truncate",
+                "font-mono text-xs px-3 py-2 transition-colors block whitespace-nowrap truncate",
                 currentSlug === null
-                  ? "bg-accent border-accent text-white shadow-[2px_2px_0_0_#0A0A0A]"
-                  : "bg-white border-ink text-ink hover:bg-ink hover:text-white hover:translate-x-[1px] hover:translate-y-[1px]"
+                  ? "text-accent font-bold"
+                  : "text-ink hover:bg-black/5"
               )}
             >
               ./全部 <span className="opacity-60">({totalCount})</span>
@@ -85,10 +85,10 @@ export function CategoryDropdown({
                 key={cat.slug}
                 href={`${base}/archive/${cat.slug}`}
                 className={cn(
-                  "font-mono text-xs font-bold px-3 py-2 border-2 transition-all block whitespace-nowrap truncate",
+                  "font-mono text-xs px-3 py-2 transition-colors block whitespace-nowrap truncate",
                   currentSlug === cat.slug
-                    ? "bg-accent border-accent text-white shadow-[2px_2px_0_0_#0A0A0A]"
-                    : "bg-white border-ink text-ink hover:bg-ink hover:text-white hover:translate-x-[1px] hover:translate-y-[1px]"
+                    ? "text-accent font-bold"
+                    : "text-ink hover:bg-black/5"
                 )}
               >
                 ./{cat.name} <span className="opacity-60">({cat.count})</span>

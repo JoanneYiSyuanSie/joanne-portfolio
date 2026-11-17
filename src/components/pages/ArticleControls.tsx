@@ -47,10 +47,10 @@ export function ArticleControls({ slug }: { slug: string }) {
   };
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 border-t-2 border-ink pt-6">
+    <div className="flex flex-wrap items-center justify-between gap-4 border-t border-black/15 pt-6">
       <div className="flex items-center gap-2">
-        <span className="font-mono text-xs font-bold text-ink/70">TEXT_SIZE:</span>
-        <div className="flex bg-ink/5 border-2 border-ink p-1">
+        <span className="font-mono text-xs text-ink-light">TEXT_SIZE:</span>
+        <div className="flex bg-black/5 border border-black/15 p-1">
           {(["sm", "md", "lg"] as TextSize[]).map((size) => (
             <button
               key={size}
@@ -68,8 +68,8 @@ export function ArticleControls({ slug }: { slug: string }) {
       </div>
 
       <div className="hidden md:flex items-center gap-2">
-        <span className="font-mono text-xs font-bold text-ink/70">ALIGN:</span>
-        <div className="flex bg-ink/5 border-2 border-ink p-1">
+        <span className="font-mono text-xs text-ink-light">ALIGN:</span>
+        <div className="flex bg-black/5 border border-black/15 p-1">
           <button
             onClick={() => handleSetLayoutAlign("left")}
             className={cn(
@@ -95,7 +95,6 @@ export function ArticleControls({ slug }: { slug: string }) {
         </div>
       </div>
 
-      <div className="w-full sm:w-auto h-2 bg-ink flex-1 sm:ml-4 hidden sm:block"></div>
     </div>
   );
 }
