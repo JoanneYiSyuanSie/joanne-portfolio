@@ -48,36 +48,35 @@ export function CategoryDropdown({
       <button
         onClick={handleToggle}
         className={cn(
-          "font-mono text-xs px-4 py-2 border transition-colors cursor-pointer flex items-center gap-2",
+          "font-sans text-sm px-4 py-2 border border-ink/40 transition-colors cursor-pointer flex items-center gap-2",
           isOpen
-            ? "bg-white text-ink border-white"
-            : "bg-transparent border-white/40 text-white hover:border-white"
+            ? "bg-ink text-paper border-ink"
+            : "bg-transparent text-ink hover:border-ink"
         )}
       >
         <svg className="w-4 h-4 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M16 6l4 14M12 6v14M8 8v12M4 4v16" />
         </svg>
-        {currentName && <span className="opacity-60 font-black">/</span>}
-        {currentName && <span>{currentName}</span>}
+        <span>{displayLabel}</span>
         <span className="ml-1 transition-transform duration-200" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
           ▾
         </span>
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 z-50 bg-white border border-black/15 shadow-lg p-2 min-w-[280px] sm:w-max max-w-[90vw] animate-modal-in">
+        <div className="absolute top-full left-0 mt-2 z-50 bg-white border border-black/25 p-2 min-w-[280px] sm:w-max max-w-[90vw] animate-modal-in">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
             {/* "全部" option */}
             <a
               href={`${base}/archive`}
               className={cn(
-                "font-mono text-xs px-3 py-2 transition-colors block whitespace-nowrap truncate",
+                "font-sans text-sm px-3 py-2 transition-colors block whitespace-nowrap truncate",
                 currentSlug === null
                   ? "text-accent font-bold"
                   : "text-ink hover:bg-black/5"
               )}
             >
-              ./全部 <span className="opacity-60">({totalCount})</span>
+              全部 <span className="opacity-60">({totalCount})</span>
             </a>
 
             {categories.map((cat) => (
@@ -85,13 +84,13 @@ export function CategoryDropdown({
                 key={cat.slug}
                 href={`${base}/archive/${cat.slug}`}
                 className={cn(
-                  "font-mono text-xs px-3 py-2 transition-colors block whitespace-nowrap truncate",
+                  "font-sans text-sm px-3 py-2 transition-colors block whitespace-nowrap truncate",
                   currentSlug === cat.slug
                     ? "text-accent font-bold"
                     : "text-ink hover:bg-black/5"
                 )}
               >
-                ./{cat.name} <span className="opacity-60">({cat.count})</span>
+                {cat.name} <span className="opacity-60">({cat.count})</span>
               </a>
             ))}
           </div>

@@ -31,23 +31,23 @@ export function Archive({
   });
 
   return (
-    <div className="p-0 flex flex-col h-full min-h-full">
-      <header className="px-8 py-10 bg-ink text-white relative shrink-0 z-50" style={{ viewTransitionName: 'archive-header' }}>
-        <h1 className="font-sans text-4xl font-extrabold tracking-tight mb-2">
+    <div className="p-0 flex flex-col h-full min-h-full max-w-5xl mx-auto w-full">
+      <header className="px-6 md:px-8 pt-10 md:pt-14 pb-8 relative z-50" style={{ viewTransitionName: 'archive-header' }}>
+        <h1 className="font-serif text-4xl font-semibold mb-3">
           文章
         </h1>
-        <p className="font-sans max-w-xl mb-6 text-white/70">
+        <p className="font-sans text-ink-light max-w-xl mb-8">
           共 {posts.length} 篇。收錄所有 SEO、內容策略與行銷自動化實務文章。
         </p>
 
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <CategoryDropdown 
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-black/15 pt-6">
+          <CategoryDropdown
             categories={categories}
             currentSlug={currentCategorySlug}
             currentName={currentCategoryName}
             totalCount={totalCount}
           />
-          
+
           <div className="flex justify-end items-center min-h-[36px]">
             {isSearchOpen || searchQuery ? (
               <div className="flex items-center w-full sm:w-[240px] animate-in fade-in slide-in-from-right-4 duration-200">
@@ -58,17 +58,17 @@ export function Archive({
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onBlur={() => { if (!searchQuery) setIsSearchOpen(false) }}
                   placeholder="搜尋文章…"
-                  className="w-full bg-transparent border-b border-white/30 text-white font-sans py-1 text-sm focus:border-white focus:outline-none transition-colors placeholder-white/40"
+                  className="w-full bg-transparent border-b border-ink/30 text-ink font-sans py-1 text-sm focus:border-ink focus:outline-none transition-colors placeholder-ink/40"
                 />
               </div>
             ) : (
-              <button 
-                onClick={() => setIsSearchOpen(true)} 
-                className="opacity-40 hover:opacity-100 transition-opacity p-2 flex items-center justify-center border border-transparent hover:border-white/30"
-                title="Search Database"
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="opacity-50 hover:opacity-100 transition-opacity p-2 flex items-center justify-center"
+                title="搜尋文章"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </button>
             )}
@@ -76,48 +76,34 @@ export function Archive({
         </div>
       </header>
 
-      <div className="flex flex-col pb-8">
+      <div className="flex flex-col px-6 md:px-8 pb-16">
         {filteredPosts.length === 0 ? (
-          <div className="p-8 font-sans text-ink text-lg text-center opacity-50">
+          <div className="py-12 font-sans text-ink text-lg text-center opacity-50">
             沒有符合的文章。
           </div>
         ) : (
-          filteredPosts.map((post, index) => (
+          filteredPosts.map((post) => (
             <a
               key={post.slug}
               href={getPostUrl(post)}
-              className="group block border-b border-black/15"
+              className="group block border-t border-black/15 last:border-b"
             >
-              <div className="flex flex-col md:flex-row md:items-baseline py-6 px-8 gap-2 md:gap-4">
-                <div className="font-mono text-xs w-12 shrink-0 text-ink-light">
-                  #{(index + 1).toString().padStart(3, '0')}
-                </div>
+              <div className="grid md:grid-cols-[110px_1fr_110px] gap-1 md:gap-7 py-6 md:items-baseline">
+                <span className="font-sans text-xs tracking-[0.14em] text-accent">
+                  {post.category}
+                </span>
 
-                <div className="flex-1 flex flex-col">
-                  <h3 className="font-sans text-2xl font-bold group-hover:text-accent transition-colors mb-2 md:mb-0">
-                    {post.title}
-                  </h3>
-                </div>
+                <h3 className="font-serif text-2xl font-semibold leading-snug group-hover:text-accent transition-colors">
+                  {post.title}
+                </h3>
 
-                <div className="flex items-center gap-3 font-mono text-xs shrink-0 mt-2 md:mt-0">
-                  <span className="text-accent font-bold">
-                    {post.category}
-                  </span>
-                  <span className="w-24 text-right text-ink-light hidden sm:block">
-                    {post.status}
-                  </span>
-                  <span className="w-24 text-right text-ink-light">
-                    {post.date.slice(0, 10).replace(/-/g, '.')}
-                  </span>
-                </div>
+                <span className="font-sans text-xs text-ink-light md:text-right">
+                  {post.date.slice(0, 10).replace(/-/g, '.')}
+                </span>
               </div>
             </a>
           ))
         )}
-      </div>
-      
-      <div className="p-8 text-center font-mono text-xs text-ink-light">
-        [ END OF INDEX ]
       </div>
     </div>
   );

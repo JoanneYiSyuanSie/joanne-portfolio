@@ -54,7 +54,7 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
         }}
       >
         {/* Modal card */}
-        <div className="relative w-full max-w-md bg-white border border-black/15 shadow-lg animate-modal-in">
+        <div className="relative w-full max-w-md bg-white border border-black/25 animate-modal-in">
           {/* Close button */}
           <button
             onClick={handleClose}
@@ -67,9 +67,7 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
           {state === "demo" ? (
             /* ====== DEMO STATE ====== */
             <div className="p-8 space-y-6">
-              <div className="font-mono text-[10px] font-bold">
-                <span className="bg-ink text-white px-1.5 py-0.5">功能示範</span>
-              </div>
+              <div className="font-sans text-xs font-bold tracking-[0.2em] text-ink-light">功能示範</div>
               <p className="font-sans text-base text-ink leading-relaxed">
                 這是功能示範，表單內容沒有送出，也不會寄到任何地方。
               </p>
@@ -85,7 +83,7 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
             <>
               {/* Header */}
               <div className="p-6 pb-0">
-                <h2 className="font-sans text-xl font-bold text-ink">
+                <h2 className="font-serif text-2xl font-semibold text-ink">
                   訂閱電子報
                 </h2>
               </div>
@@ -99,7 +97,7 @@ export function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
                 className="p-6 space-y-5"
               >
                 {/* Demo notice */}
-                <p className="font-sans text-sm text-ink-light leading-relaxed border border-black/15 bg-paper p-3">
+                <p className="font-sans text-sm text-ink-light leading-relaxed border-y border-black/15 py-3">
                   功能示範：這個表單尚未串接電子報服務，送出後不會真的寄出。
                 </p>
 

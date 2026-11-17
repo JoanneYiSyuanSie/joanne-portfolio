@@ -7,8 +7,8 @@ export function NotFound() {
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center p-8 relative">
       <div className="relative z-10 text-center space-y-6">
-        <h1 className="font-sans text-7xl md:text-8xl font-extrabold tracking-tight text-ink">
-          404<span className="text-accent">.</span>
+        <h1 className="font-serif text-7xl md:text-8xl font-semibold text-ink">
+          404
         </h1>
 
         <p className="font-sans text-xl max-w-md mx-auto text-ink-light">

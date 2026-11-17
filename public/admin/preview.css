@@ -1,9 +1,9 @@
 /* 1:1 Frontend Replication CSS for CMS Preview */
 
 :root {
-  --theme-accent: #E2001A;
-  --color-paper: #F4F4F4;
-  --color-ink: #0E0E0E;
+  --theme-accent: #3F5147;
+  --color-paper: #F7F3EC;
+  --color-ink: #26221C;
   --color-ink-light: #525252;
 }
 
@@ -28,8 +28,8 @@ header {
 }
 
 h1 {
-  font-family: "Noto Sans TC", sans-serif !important;
-  font-weight: 900 !important;
+  font-family: "Fraunces", "Noto Serif TC", serif !important;
+  font-weight: 600 !important;
   font-size: 2.25rem !important; /* text-4xl */
   line-height: 1.2 !important;
   margin-bottom: 2rem !important;
@@ -51,12 +51,11 @@ h1 {
 }
 
 .badge-category {
-  background-color: var(--theme-accent);
-  color: white;
+  color: var(--theme-accent);
 }
 
 .badge-date {
-  border: 2px solid var(--color-ink);
+  border: 1px solid var(--color-ink);
   color: var(--color-ink);
 }
 

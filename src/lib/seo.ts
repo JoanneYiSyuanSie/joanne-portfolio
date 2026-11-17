@@ -15,7 +15,7 @@ interface SEOProps {
 }
 
 const DEFAULT_TITLE = 'Joanne ｜ Personal Portfolio & Tech Archive';
-const DEFAULT_DESC = 'Joanne 的個人作品集與技術筆記庫。聚焦現代前端工程、混合渲染架構與新粗獷主義介面設計。';
+const DEFAULT_DESC = 'Joanne 的個人作品集與技術筆記庫。聚焦 Technical SEO、內容策略與行銷自動化。';
 
 function setMeta(name: string, content: string, attribute: 'name' | 'property' = 'name') {
   let el = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement | null;

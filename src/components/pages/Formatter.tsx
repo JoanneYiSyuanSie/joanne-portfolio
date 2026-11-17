@@ -51,14 +51,14 @@ export function Formatter() {
 
   return (
     <div className="flex flex-col bg-paper">
-      <div className="sticky top-0 bg-ink text-white z-20 flex items-center justify-between p-4 px-6 md:px-12 border-b border-black/20">
+      <div className="flex items-center justify-between p-4 px-6 md:px-12 border-b border-black/15">
         <div className="font-sans text-sm font-bold">排版小工具</div>
-        <div className="font-mono text-xs opacity-80">離線工具</div>
+        <div className="font-sans text-xs text-ink-light">離線工具</div>
       </div>
 
       <div className="flex-1 w-full p-6 md:p-12 pb-32 max-w-6xl mx-auto">
         <header className="mb-12">
-          <h1 className="font-sans text-3xl md:text-4xl font-extrabold tracking-tight text-ink leading-snug mb-4">
+          <h1 className="font-serif text-3xl md:text-4xl font-semibold text-ink leading-snug mb-4">
             自動排版小工具
           </h1>
           <p className="font-sans text-sm text-ink-light max-w-2xl leading-relaxed">
@@ -72,7 +72,7 @@ export function Formatter() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full min-h-[60vh]">
           {/* Input Area */}
           <div className="flex flex-col gap-2">
-            <label className="font-mono text-xs text-ink-light flex justify-between border-b border-black/15 pb-2">
+            <label className="font-sans text-xs text-ink-light flex justify-between border-b border-black/15 pb-2">
               <span>原文</span>
             </label>
             <textarea
@@ -95,7 +95,7 @@ export function Formatter() {
             </div>
             <button
               onClick={formatText}
-              className="w-full py-3 bg-ink text-white font-sans font-bold hover:bg-accent transition-colors mt-2 cursor-pointer"
+              className="w-full py-3 border border-ink bg-transparent text-ink font-sans font-bold hover:bg-ink hover:text-white transition-colors mt-2 cursor-pointer"
             >
               開始排版
             </button>
@@ -103,7 +103,7 @@ export function Formatter() {
 
           {/* Output Area */}
           <div className="flex flex-col gap-2">
-            <label className="font-mono text-xs text-ink-light flex justify-between border-b border-black/15 pb-2">
+            <label className="font-sans text-xs text-ink-light flex justify-between border-b border-black/15 pb-2">
               <span>排版結果</span>
               {copied && <span className="text-accent animate-pulse">已複製！</span>}
             </label>
@@ -119,8 +119,8 @@ export function Formatter() {
               className={cn(
                 "w-full py-3 font-sans font-bold transition-colors mt-4",
                 output
-                  ? "bg-accent text-white hover:bg-ink cursor-pointer"
-                  : "bg-black/10 text-ink/30 cursor-not-allowed"
+                  ? "border border-ink bg-transparent text-ink hover:bg-ink hover:text-white cursor-pointer"
+                  : "border border-black/15 text-ink/30 cursor-not-allowed"
               )}
             >
               {copied ? "已複製" : "複製結果"}

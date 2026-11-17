@@ -11,7 +11,7 @@
 | 領域 | 技術 |
 | :--- | :--- |
 | 框架 | Astro 6（靜態生成） |
-| UI | React 19 + Tailwind CSS v4（新粗獷主義） |
+| UI | React 19 + Tailwind CSS v4（新編輯風：襯線標題＋雜誌式排版） |
 | 內容 | Markdown + YAML Frontmatter |
 | 部署 | GitHub Actions + GitHub Pages |
 

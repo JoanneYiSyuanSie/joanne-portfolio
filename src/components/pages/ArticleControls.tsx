@@ -49,14 +49,14 @@ export function ArticleControls({ slug }: { slug: string }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-4 border-t border-black/15 pt-6">
       <div className="flex items-center gap-2">
-        <span className="font-mono text-xs text-ink-light">TEXT_SIZE:</span>
+        <span className="font-sans text-xs text-ink-light">字體大小</span>
         <div className="flex bg-black/5 border border-black/15 p-1">
           {(["sm", "md", "lg"] as TextSize[]).map((size) => (
             <button
               key={size}
               onClick={() => handleSetTextSize(size)}
               className={cn(
-                "w-8 h-8 flex items-center justify-center font-mono font-bold text-sm transition-colors cursor-pointer",
+                "w-8 h-8 flex items-center justify-center font-sans font-bold text-sm transition-colors cursor-pointer",
                 textSize === size ? "bg-accent text-white" : "text-ink hover:bg-ink/10"
               )}
               aria-label={`Set text size to ${size}`}
@@ -68,7 +68,7 @@ export function ArticleControls({ slug }: { slug: string }) {
       </div>
 
       <div className="hidden md:flex items-center gap-2">
-        <span className="font-mono text-xs text-ink-light">ALIGN:</span>
+        <span className="font-sans text-xs text-ink-light">對齊</span>
         <div className="flex bg-black/5 border border-black/15 p-1">
           <button
             onClick={() => handleSetLayoutAlign("left")}

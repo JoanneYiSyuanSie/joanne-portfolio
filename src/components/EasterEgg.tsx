@@ -157,7 +157,7 @@ export function EasterEgg({ config }: EasterEggProps) {
       />
 
       {/* System Style Modal */}
-      <div className="relative z-10 max-w-lg w-full bg-white border border-black/15 shadow-lg overflow-hidden">
+      <div className="relative z-10 max-w-lg w-full bg-white border border-black/15 overflow-hidden">
         {/* System Header */}
         <div className="bg-ink text-white p-3 flex justify-between items-center border-b border-black/15">
           <div className="font-mono text-xs tracking-tighter font-bold flex items-center gap-2">

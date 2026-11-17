@@ -71,7 +71,7 @@ export function CommissionForm() {
   if (status === "SUCCESS") {
     return (
       <div className="w-full max-w-md mx-auto my-auto border-2 sm:border-4 border-ink p-6 sm:p-8 bg-white flex flex-col items-center justify-center text-center space-y-5 animate-in fade-in zoom-in-95 box-border">
-        <div className="inline-flex items-center gap-1.5 border-2 border-ink px-3 py-1 font-mono text-xs font-bold bg-white text-accent tracking-wider whitespace-nowrap">
+        <div className="inline-flex items-center gap-1.5 border-2 border-ink px-3 py-1 font-sans text-xs font-bold bg-white text-accent tracking-wider whitespace-nowrap">
           <span>✓</span>
           <span>TRANSMISSION_SUCCESS</span>
         </div>
@@ -88,7 +88,7 @@ export function CommissionForm() {
         <div className="pt-2 w-full sm:w-auto">
           <button
             onClick={() => setStatus("IDLE")}
-            className="brutalist-button w-full sm:w-auto px-6 py-2.5 text-xs sm:text-sm font-mono font-bold tracking-wider"
+            className="brutalist-button w-full sm:w-auto px-6 py-2.5 text-xs sm:text-sm font-sans font-bold tracking-wider"
           >
             RETURN_TO_FORM
           </button>
@@ -101,9 +101,9 @@ export function CommissionForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-8 max-w-xl mx-auto pb-8">
       {status === "ERROR" && (
-        <div className="border border-black/15 bg-white p-4 font-mono text-xs sm:text-sm space-y-1">
+        <div className="border-y border-black/15 py-4 font-sans text-xs sm:text-sm space-y-1">
           <div className="text-ink font-bold flex items-center gap-2">
-            <span className="bg-ink text-white px-1.5 py-0.5 text-[10px]">NOTICE</span>
+            <span className="border border-ink px-1.5 py-0.5 text-[10px]">NOTICE</span>
             <span>功能示範</span>
           </div>
           <p className="text-ink-light font-sans font-bold text-sm leading-snug pt-1">
@@ -113,7 +113,7 @@ export function CommissionForm() {
       )}
 
       {/* 1. 成年確認 */}
-      <div className="space-y-3 p-4 border border-black/15 bg-white">
+      <div className="space-y-3 border-t border-black/15 pt-6">
         <label className="block font-sans font-bold text-lg text-ink">
           您成年了嗎？ <span className="text-accent font-bold">*</span>
         </label>
@@ -144,8 +144,8 @@ export function CommissionForm() {
           </label>
         </div>
         {data.isAdult === "否" && (
-          <div className="mt-3 p-3 border border-black/15 bg-white text-ink font-sans text-xs sm:text-sm font-bold flex items-start gap-2.5 animate-in fade-in slide-in-from-top-2">
-            <span className="font-mono text-[10px] bg-ink text-white px-1.5 py-0.5 shrink-0 font-bold">NOTICE</span>
+          <div className="mt-3 py-3 border-y border-black/15 text-ink font-sans text-xs sm:text-sm font-bold flex items-start gap-2.5 animate-in fade-in slide-in-from-top-2">
+            <span className="font-sans text-[10px] border border-ink px-1.5 py-0.5 shrink-0 font-bold">NOTICE</span>
             <span className="leading-relaxed">無論內容尺度，僅接受 18 歲以上成年人進行委託</span>
           </div>
         )}
@@ -168,7 +168,7 @@ export function CommissionForm() {
       {/* 3. 聯絡方式 */}
       <div className="space-y-2">
         <label className="block font-sans font-bold text-lg text-ink">
-          您的 Email <span className="text-[#D9453B]">*</span>
+          您的 Email <span className="text-accent">*</span>
         </label>
         <p className="text-sm font-bold text-ink-light font-sans mb-2">您偏好的聯絡信箱</p>
         <input
@@ -184,7 +184,7 @@ export function CommissionForm() {
       {/* 委託經歷 */}
       <div className="space-y-3">
         <label className="block font-sans font-bold text-lg text-ink">
-          曾與 Joanne 合作過嗎？ <span className="text-[#D9453B]">*</span>
+          曾與 Joanne 合作過嗎？ <span className="text-accent">*</span>
         </label>
         <div className="flex flex-wrap gap-6 mt-2">
           {["初次合作", "非初次合作"].map((option) => (
@@ -219,9 +219,9 @@ export function CommissionForm() {
       </div>
 
       {/* 5. 委託形式 */}
-      <div className="space-y-3 p-4 border border-black/15 bg-white">
+      <div className="space-y-3 border-t border-black/15 pt-6">
         <label className="block font-sans font-bold text-lg text-ink">
-          委託形式 <span className="text-[#D9453B]">*</span>
+          委託形式 <span className="text-accent">*</span>
         </label>
         <div className="space-y-4 mt-4">
           {(config.commission.types || [
@@ -253,20 +253,20 @@ export function CommissionForm() {
                 />
                 <span className="font-sans font-bold peer-checked:text-accent group-hover:text-accent transition-colors flex items-center flex-wrap gap-2">
                   {type.label}
-                  <span className="text-[10px] font-mono bg-ink/10 text-ink px-1 border border-ink/20 rounded-sm">?</span>
+                  <span className="text-[10px] font-sans bg-ink/10 text-ink px-1 border border-ink/20 rounded-sm">?</span>
                   {type.id === "驚喜包" && isSurprisePackOpen && config.commission.surprisePackReferenceUrl && (
                     <a
                       href={`${base}${config.commission.surprisePackReferenceUrl}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-xs text-accent underline hover:text-ink font-mono font-bold ml-1"
+                      className="text-xs text-accent underline hover:text-ink font-sans font-bold ml-1"
                       onClick={(e) => e.stopPropagation()}
                     >
                       [ 活動須知 ↗ ]
                     </a>
                   )}
                   {type.id === "驚喜包" && !isSurprisePackOpen && (
-                    <span className="text-xs bg-ink text-white px-2 py-0.5 flex items-center gap-1">
+                    <span className="text-xs border border-ink px-2 py-0.5 flex items-center gap-1">
                       目前未開放
                       {config.commission.surprisePackReferenceUrl && (
                         <a
@@ -282,14 +282,14 @@ export function CommissionForm() {
                     </span>
                   )}
                   {type.id === "客製化" && !isCustomCommissionOpen && (
-                    <span className="text-xs bg-ink text-white px-2 py-0.5">目前未開放</span>
+                    <span className="text-xs border border-ink px-2 py-0.5">目前未開放</span>
                   )}
                 </span>
 
                 {/* Hover Tooltip */}
                 {type.description && !isDisabled && (
-                  <div className="absolute left-8 top-full mt-1 w-72 p-3 bg-white text-ink border border-black/15 shadow-lg text-sm font-sans font-bold z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none whitespace-pre-wrap">
-                    <div className="font-mono text-xs text-accent mb-1">[ INFO ]</div>
+                  <div className="absolute left-8 top-full mt-1 w-72 p-3 bg-white text-ink border border-black/25 text-sm font-sans font-bold z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none whitespace-pre-wrap">
+                    <div className="font-sans text-xs text-accent mb-1">補充說明</div>
                     {type.description}
                   </div>
                 )}
@@ -303,17 +303,17 @@ export function CommissionForm() {
 
       {/* 驚喜包(有開放) 或 客製化(有開放) */}
       {((data.commissionType === "驚喜包" && isSurprisePackOpen) || (data.commissionType === "客製化" && isCustomCommissionOpen)) && (
-        <div className="space-y-8 p-6 border border-black/15 bg-white animate-in fade-in slide-in-from-top-4">
+        <div className="space-y-8 border-t border-black/15 pt-6 animate-in fade-in slide-in-from-top-4">
 
           {/* 驚喜包專屬：活動須知橫幅 */}
           {data.commissionType === "驚喜包" && config.commission.surprisePackReferenceUrl && (
-            <div className="p-3 bg-white border border-black/15 flex items-center justify-between text-xs sm:text-sm font-bold">
+            <div className="py-3 border-y border-black/15 flex items-center justify-between text-xs sm:text-sm font-bold">
               <span className="text-ink">✦ 填單前請先確認本期驚喜包規則與主題：</span>
               <a
                 href={`${base}${config.commission.surprisePackReferenceUrl}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 text-accent underline hover:text-ink font-mono whitespace-nowrap ml-2"
+                className="inline-flex items-center gap-1 text-accent underline hover:text-ink font-sans whitespace-nowrap ml-2"
               >
                 [ 活動須知 ↗ ]
               </a>
@@ -322,7 +322,7 @@ export function CommissionForm() {
 
           <div className="space-y-2">
             <label className="block font-sans font-bold text-lg text-ink">
-              設定資料連結 <span className="text-[#D9453B]">*</span>
+              設定資料連結 <span className="text-accent">*</span>
             </label>
             <input
               type="url"
@@ -336,7 +336,7 @@ export function CommissionForm() {
 
           <div className="space-y-3">
             <label className="block font-sans font-bold text-lg text-ink">
-              可接受Paro / AU <span className="text-[#D9453B]">*</span>
+              可接受Paro / AU <span className="text-accent">*</span>
             </label>
             <p className="text-sm font-bold text-ink-light font-sans mb-2">可能參考既有paro設定或自由發揮，也可能最後還是寫原設</p>
             <div className="flex gap-6 mt-2">
@@ -373,7 +373,7 @@ export function CommissionForm() {
               {/* 偏好模式 */}
               <div className="space-y-3">
                 <label className="block font-sans font-bold text-lg text-ink">
-                  偏好模式 <span className="text-[#D9453B]">*</span>
+                  偏好模式 <span className="text-accent">*</span>
                 </label>
                 <div className="flex flex-col gap-3 mt-2">
                   {[
@@ -399,7 +399,7 @@ export function CommissionForm() {
               {/* 希望篇幅 */}
               <div className="space-y-3">
                 <label className="block font-sans font-bold text-lg text-ink">
-                  希望篇幅 <span className="text-[#D9453B]">*</span>
+                  希望篇幅 <span className="text-accent">*</span>
                 </label>
                 <div className="flex flex-col gap-3 mt-2">
                   {["1000-2000字", "2001-3000字", "3001-4000字", "4001-5000字", "其他"].map((option) => (
@@ -424,7 +424,7 @@ export function CommissionForm() {
           {/* 回覆頻率 */}
           <div className="space-y-3">
             <label className="block font-sans font-bold text-lg text-ink">
-              您回覆訊息的頻率 <span className="text-[#D9453B]">*</span>
+              您回覆訊息的頻率 <span className="text-accent">*</span>
             </label>
             <div className="flex flex-col gap-3 mt-2">
               {["24小時內", "48小時內", "72小時內"].map((option) => (
@@ -476,7 +476,7 @@ export function CommissionForm() {
 
       {/* 詢問回報 */}
       {data.commissionType === "詢問" && (
-        <div className="space-y-8 p-6 border border-black/15 bg-white animate-in fade-in slide-in-from-top-4">
+        <div className="space-y-8 border-t border-black/15 pt-6 animate-in fade-in slide-in-from-top-4">
           <div className="space-y-2">
             <label className="block font-sans font-bold text-lg text-ink">
               請說

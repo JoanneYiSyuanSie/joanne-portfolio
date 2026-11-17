@@ -14,9 +14,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 
-const PAPER = [0xf4, 0xf4, 0xf4];
-const INK = [0x0e, 0x0e, 0x0e];
-const ACCENT = [0xe2, 0x00, 0x1a];
+const PAPER = [0xf7, 0xf3, 0xec];
+const INK = [0x26, 0x22, 0x1c];
+const ACCENT = [0x3f, 0x51, 0x47];
 
 function canvas(W, H) {
   const px = Buffer.alloc(W * H * 3);

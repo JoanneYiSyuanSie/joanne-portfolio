@@ -3,15 +3,14 @@
 
 @theme {
   --font-sans: "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
-  /* Swiss index: one grotesk carries everything; serif token kept as an
-     alias so any leftover font-serif usage renders as grotesk. */
-  --font-serif: "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
+  /* Neo-editorial: serif display (Fraunces latin + Noto Serif TC) + sans body. */
+  --font-serif: "Fraunces", "Noto Serif TC", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-paper: #F4F4F4;
-  --color-ink: #0E0E0E;
-  --color-ink-light: #6B6B6B;
-  --color-accent: var(--theme-accent, #E2001A);
+  --color-paper: #F7F3EC;
+  --color-ink: #26221C;
+  --color-ink-light: #7A7365;
+  --color-accent: var(--theme-accent, #3F5147);
 }
 
 @layer base {
@@ -27,7 +26,7 @@
   }
 
   .brutalist-button {
-    @apply bg-ink text-white px-4 py-2 font-sans font-bold transition-colors hover:bg-accent cursor-pointer;
+    @apply bg-transparent text-ink border border-ink px-4 py-2 font-sans font-bold transition-colors hover:bg-ink hover:text-white cursor-pointer;
   }
 
   @keyframes marquee {
@@ -146,7 +145,7 @@
 }
 
 .preview-container h1 {
-  @apply text-4xl font-black mb-8 border-l-2 border-accent pl-6;
+  @apply text-4xl font-semibold mb-8 border-l-2 border-accent pl-6;
 }
 
 .empty-line {
